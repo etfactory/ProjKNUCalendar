@@ -1,3 +1,5 @@
+package project.knucalendar;
+
 import javax.swing.*;
 import java.awt.*;
 import java.util.*;
@@ -19,9 +21,6 @@ public class nowTime extends JFrame {
         setVisible(true);
 
         th.start();
-    }
-    public static void main(String[] args){
-        new nowTime();
     }
 }
 class Timer extends Thread {
