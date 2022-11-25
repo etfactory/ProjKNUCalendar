@@ -7,7 +7,7 @@ import java.awt.event.ActionListener;
 import java.net.*;
 
 public class mainPanel extends JFrame implements ActionListener {
-    final String title = "mainUI Test";
+    final String title = "KNU Calendar Program";
     JFrame mainFrame;
     JPanel centrePanel, topPanel, bottomPanel;
     JButton linkedKNU, linkedLMS, linkedSugang;
@@ -17,6 +17,8 @@ public class mainPanel extends JFrame implements ActionListener {
     ImageIcon KNUPage = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/button/KNUPage.png")));
     ImageIcon LMSPage = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/button/LMSPage.png")));
     ImageIcon SugangPage = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/button/수강신청.png")));
+
+    makingCalendar makingCalendar;
 
     public mainPanel(){
         mainFrame = new JFrame(title);
@@ -51,7 +53,6 @@ public class mainPanel extends JFrame implements ActionListener {
         /*
         여기에 일정, 달력 순 생성
          */
-
         centrePanel.setLayout(new FlowLayout());
 
         bottomPanel = new JPanel(){
