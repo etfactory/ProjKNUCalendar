@@ -2,12 +2,15 @@ package project.knucalendar;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.net.*;
 
-public class mainPanel {
+public class mainPanel extends JFrame implements ActionListener {
     final String title = "mainUI Test";
     JFrame mainFrame;
     JPanel centrePanel, topPanel, bottomPanel;
-
+    JButton linkedKNU, linkedLMS, linkedSugang;
     ImageIcon icon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/icon/bear/bearVersion2_1.png")));
     ImageIcon normalBackground = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/background (1280x720)/centre.png")));
     ImageIcon bottomNormal = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/background (1280x720)/bottom.png")));
@@ -60,18 +63,21 @@ public class mainPanel {
         };
 
         bottomPanel.setLayout(new FlowLayout(FlowLayout.CENTER,20,10));
-        JButton linkedKNU = new JButton(KNUPage);
+        linkedKNU = new JButton(KNUPage);
         linkedKNU.setFocusPainted(false);
         linkedKNU.setBorderPainted(false);
         linkedKNU.setContentAreaFilled(false);
-        JButton linkedLMS = new JButton(LMSPage);
+        linkedKNU.addActionListener(this);
+        linkedLMS = new JButton(LMSPage);
         linkedLMS.setFocusPainted(false);
         linkedLMS.setBorderPainted(false);
         linkedLMS.setContentAreaFilled(false);
-        JButton linkedSugang = new JButton(SugangPage);
+        linkedLMS.addActionListener(this);
+        linkedSugang = new JButton(SugangPage);
         linkedSugang.setFocusPainted(false);
         linkedSugang.setBorderPainted(false);
         linkedSugang.setContentAreaFilled(false);
+        linkedSugang.addActionListener(this);
         bottomPanel.add(linkedKNU);
         bottomPanel.add(linkedLMS);
         bottomPanel.add(linkedSugang);
@@ -82,5 +88,40 @@ public class mainPanel {
         mainFrame.add(topPanel,BorderLayout.PAGE_START);
         mainFrame.add(bottomPanel,BorderLayout.PAGE_END);
         mainFrame.add(centrePanel,BorderLayout.CENTER);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == linkedKNU) {
+            try {
+                if (Desktop.isDesktopSupported()) {
+                    Desktop desktop = Desktop.getDesktop();
+                    URI uri = new URI("https://kongju.ac.kr/");
+                    desktop.browse(uri);
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        } else if (e.getSource() == linkedLMS) {
+            try {
+                if (Desktop.isDesktopSupported()) {
+                    Desktop desktop = Desktop.getDesktop();
+                    URI uri = new URI("https://knulms.kongju.ac.kr/");
+                    desktop.browse(uri);
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        } else if (e.getSource() == linkedSugang) {
+            try {
+                if (Desktop.isDesktopSupported()) {
+                    Desktop desktop = Desktop.getDesktop();
+                    URI uri = new URI("https://sugang.kongju.ac.kr/");
+                    desktop.browse(uri);
+                }
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 }
