@@ -1,6 +1,8 @@
 package project.knucalendar;
 
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,7 +13,7 @@ public class mainPanel extends JFrame implements ActionListener {
     JFrame mainFrame;
     JPanel centrePanel, topPanel, bottomPanel;
     JButton linkedKNU, linkedLMS, linkedSugang;
-    JPanel calendarPanel;
+    JPanel calendarPanel, diaryPanel, rightPanel,leftPanel;
     JButton weekDaysName[] = new JButton[7];
     String WEEK_DAY_NAME[] = { "SUN", "MON", "TUE", "WED", "THR", "FRI", "SAT" };
     JPanel dateButton[][] = new JPanel[6][7];
@@ -55,9 +57,10 @@ public class mainPanel extends JFrame implements ActionListener {
         /*
         여기에 일정, 달력 순 생성
          */
+
         calendarPanel = new JPanel();
         calendarPanel.setLayout(new GridLayout(0,7,2,2));
-        calendarPanel.setSize(600,500);
+        calendarPanel.setPreferredSize(new Dimension(600,380));
         for(int i=0;i<7;i++){
             weekDaysName[i] =new JButton(WEEK_DAY_NAME[i]);
             weekDaysName[i].setBorderPainted(false);
@@ -82,9 +85,15 @@ public class mainPanel extends JFrame implements ActionListener {
                 calendarPanel.add(dateButton[i][j]);
             }
         }
-
+        calendarPanel.setBorder(new LineBorder(Color.GRAY, 2, true));
         centrePanel.setLayout(new FlowLayout());
-        centrePanel.add(calendarPanel);
+
+        rightPanel = new JPanel();
+        rightPanel.setLayout(new BorderLayout());
+        rightPanel.setBackground(Color.WHITE);
+        rightPanel.setPreferredSize(new Dimension(620,500));
+        rightPanel.add(calendarPanel,BorderLayout.PAGE_END);
+        centrePanel.add(rightPanel);
 
         bottomPanel = new JPanel(){
             public void paintComponent(Graphics g){
