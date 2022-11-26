@@ -1,7 +1,6 @@
 package project.knucalendar;
 
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -11,9 +10,8 @@ import java.net.*;
 public class mainPanel extends JFrame implements ActionListener {
     final String title = "KNU Calendar Program";
     JFrame mainFrame;
-    JPanel centrePanel, topPanel, bottomPanel;
-    JButton linkedKNU, linkedLMS, linkedSugang;
-    JPanel calendarPanel, diaryPanel, rightPanel,leftPanel;
+    JPanel centrePanel, topPanel, bottomPanel, calendarPanel, diaryPanel, rightPanel, leftPanel, top_leftPanel, top_rightPanel;
+    JButton linkedKNU, linkedLMS, linkedSugang, menuButton, todayButton;
     JButton weekDaysName[] = new JButton[7];
     String WEEK_DAY_NAME[] = { "SUN", "MON", "TUE", "WED", "THR", "FRI", "SAT" };
     JPanel dateButton[][] = new JPanel[6][7];
@@ -23,6 +21,8 @@ public class mainPanel extends JFrame implements ActionListener {
     ImageIcon KNUPage = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/button/KNUPage.png")));
     ImageIcon LMSPage = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/button/LMSPage.png")));
     ImageIcon SugangPage = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/button/수강신청.png")));
+    ImageIcon menuPage = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/button/menuButton.png")));
+    ImageIcon todayPage = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/button/homeButton.png")));
 
     public mainPanel(){
         mainFrame = new JFrame(title);
@@ -38,7 +38,24 @@ public class mainPanel extends JFrame implements ActionListener {
         topPanel = new JPanel();
         topPanel.setPreferredSize(new Dimension(1280,76));
         topPanel.setBackground(Color.WHITE);
+        topPanel.setLayout(new BorderLayout());
 
+        top_leftPanel = new JPanel();
+        top_leftPanel.setLayout(new FlowLayout());
+        top_leftPanel.setBackground(Color.WHITE);
+
+        menuButton = new JButton(menuPage);
+        menuButton.setFocusPainted(false);
+        menuButton.setBorderPainted(false);
+        menuButton.setContentAreaFilled(false);
+        top_leftPanel.add(menuButton);
+        todayButton = new JButton(todayPage);
+        todayButton.setFocusPainted(false);
+        todayButton.setBorderPainted(false);
+        todayButton.setContentAreaFilled(false);
+        top_leftPanel.add(todayButton);
+
+        topPanel.add(top_leftPanel,BorderLayout.WEST);
         /*
         메뉴, 리셋, 시계 순
         메뉴, 리셋 - 왼쪽
@@ -88,11 +105,19 @@ public class mainPanel extends JFrame implements ActionListener {
         calendarPanel.setBorder(new LineBorder(Color.GRAY, 2, true));
         centrePanel.setLayout(new FlowLayout());
 
+        leftPanel = new JPanel();
+        leftPanel.setLayout(new FlowLayout());
+        leftPanel.setPreferredSize(new Dimension(420,500));
+        JLabel text = new JLabel("일정 표시할 자리");
+        leftPanel.add(text);
+
         rightPanel = new JPanel();
         rightPanel.setLayout(new BorderLayout());
         rightPanel.setBackground(Color.WHITE);
         rightPanel.setPreferredSize(new Dimension(620,500));
         rightPanel.add(calendarPanel,BorderLayout.PAGE_END);
+
+        centrePanel.add(leftPanel);
         centrePanel.add(rightPanel);
 
         bottomPanel = new JPanel(){
@@ -122,9 +147,6 @@ public class mainPanel extends JFrame implements ActionListener {
         bottomPanel.add(linkedKNU);
         bottomPanel.add(linkedLMS);
         bottomPanel.add(linkedSugang);
-        /*
-        마우스 클릭 시 하이퍼 링크 아직 안함
-         */
 
         mainFrame.add(topPanel,BorderLayout.PAGE_START);
         mainFrame.add(bottomPanel,BorderLayout.PAGE_END);
