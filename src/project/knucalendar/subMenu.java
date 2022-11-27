@@ -17,7 +17,7 @@ public class subMenu implements ActionListener {
         subMenu.setResizable(false);
         subMenu.setVisible(true);
         centrePanel_sub = new JPanel();
-        subMenu.setLayout(new GridLayout(0,5,10,0));
+        subMenu.setLayout(new GridLayout(5,0,10,0));
 
         darkOnOff = new JButton();
         darkOnOff.addActionListener(this);
@@ -59,7 +59,7 @@ public class subMenu implements ActionListener {
             try {
                 if (Desktop.isDesktopSupported()) {
                     Desktop desktop = Desktop.getDesktop();
-                    URI uri = new URI("https://knulms.kongju.ac.kr/");
+                    URI uri = new URI("https://www.kongju.ac.kr/kongju/12499/subview.do");
                     desktop.browse(uri);
                 }
             } catch (Exception ex) {
@@ -69,7 +69,7 @@ public class subMenu implements ActionListener {
             try {
                 if (Desktop.isDesktopSupported()) {
                     Desktop desktop = Desktop.getDesktop();
-                    URI uri = new URI("https://sugang.kongju.ac.kr/");
+                    URI uri = new URI("https://www.kongju.ac.kr/kongju/13156/subview.do");
                     desktop.browse(uri);
                 }
             } catch (Exception ex) {
