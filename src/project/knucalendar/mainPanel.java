@@ -78,19 +78,15 @@ public class mainPanel extends JFrame implements ActionListener {
          */
 
         calendarPanel = new JPanel();
-        calendarPanel.setLayout(new GridLayout(0,7,2,2));
-        calendarPanel.setPreferredSize(new Dimension(600,380));
+        calendarPanel.setBackground(Color.WHITE);
+        calendarPanel.setLayout(new GridLayout(0,7,5,5));
+        calendarPanel.setPreferredSize(new Dimension(600,420));
         for(int i=0;i<7;i++){
             weekDaysName[i] =new JButton(WEEK_DAY_NAME[i]);
             weekDaysName[i].setBorderPainted(false);
             weekDaysName[i].setContentAreaFilled(false);
-            weekDaysName[i].setForeground(Color.WHITE);
-            if(i==0)
-                weekDaysName[i].setBackground(new Color(200,50,50));
-            else if (i==6)
-                weekDaysName[i].setBackground(new Color(50,100,200));
-            else
-                weekDaysName[i].setBackground(new Color(150,150,150));
+            weekDaysName[i].setForeground(Color.GRAY);
+            weekDaysName[i].setBackground(new Color(225,225,225));
             weekDaysName[i].setOpaque(true);
             weekDaysName[i].setFocusPainted(false);
             calendarPanel.add(weekDaysName[i]);
@@ -99,12 +95,12 @@ public class mainPanel extends JFrame implements ActionListener {
             for(int j=0;j<7;j++){
                 dateButton[i][j]=new JPanel();
                 dateButton[i][j].setLayout(new BorderLayout());
-                dateButton[i][j].setBackground(Color.WHITE);
+                dateButton[i][j].setBackground(new Color(250,250,250));
                 dateButton[i][j].setOpaque(true);
                 calendarPanel.add(dateButton[i][j]);
             }
         }
-        calendarPanel.setBorder(new LineBorder(Color.GRAY, 2, true));
+        calendarPanel.setBorder(new LineBorder(Color.WHITE, 2, true));
         centrePanel.setLayout(new FlowLayout());
 
         leftPanel = new JPanel();
