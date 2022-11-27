@@ -13,6 +13,9 @@ public class subMenu implements ActionListener {
         subMenu = new JFrame();
         subMenu.setSize(900,600);
         subMenu.setLayout(new BorderLayout());
+        subMenu.setLocationRelativeTo(null);
+        subMenu.setResizable(false);
+        subMenu.setVisible(true);
         centrePanel_sub = new JPanel();
         subMenu.setLayout(new GridLayout(0,5,10,0));
 
@@ -37,7 +40,7 @@ public class subMenu implements ActionListener {
         centrePanel_sub.add(resetProgram);
         centrePanel_sub.add(progInfo);
 
-        subMenu.add(centrePanel_sub);
+        subMenu.add(centrePanel_sub,BorderLayout.CENTER);
     }
 
     public void run(){

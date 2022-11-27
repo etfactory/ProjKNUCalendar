@@ -23,7 +23,7 @@ public class mainPanel extends JFrame implements ActionListener {
     ImageIcon SugangPage = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/button/수강신청.png")));
     ImageIcon menuPage = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/button/menuButton.png")));
     ImageIcon todayPage = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/button/homeButton.png")));
-    subMenu subMenu = new subMenu();
+    subMenu subMenu;
 
     public mainPanel(){
         mainFrame = new JFrame(title);
@@ -189,7 +189,7 @@ public class mainPanel extends JFrame implements ActionListener {
             }
         } else if (e.getSource() == menuButton) {
             try {
-                subMenu.run();
+                new subMenu();
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
