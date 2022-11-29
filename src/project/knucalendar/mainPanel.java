@@ -50,11 +50,13 @@ public class mainPanel extends JFrame implements ActionListener {
         menuButton.setBorderPainted(false);
         menuButton.setContentAreaFilled(false);
         menuButton.addActionListener(this);
+        menuButton.setPreferredSize(new Dimension(menuPage.getIconWidth(),menuPage.getIconHeight()));
         top_leftPanel.add(menuButton);
         todayButton = new JButton(todayPage);
         todayButton.setFocusPainted(false);
         todayButton.setBorderPainted(false);
         todayButton.setContentAreaFilled(false);
+        todayButton.setPreferredSize(new Dimension(todayPage.getIconWidth(),todayPage.getIconHeight()));
         top_leftPanel.add(todayButton);
 
         topPanel.add(top_leftPanel,BorderLayout.WEST);
