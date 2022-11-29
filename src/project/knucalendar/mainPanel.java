@@ -6,12 +6,14 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.*;
+import java.util.Calendar;
 
 public class mainPanel extends JFrame implements ActionListener {
     final String title = "KNU Calendar Program";
     JFrame mainFrame;
-    JPanel centrePanel, topPanel, bottomPanel, calendarPanel, diaryPanel, rightPanel, leftPanel, top_leftPanel, top_rightPanel;
+    JPanel centrePanel, topPanel, bottomPanel, calendarPanel, showDiary, rightPanel, leftPanel, top_leftPanel, top_rightPanel;
     JButton linkedKNU, linkedLMS, linkedSugang, menuButton, todayButton;
+    JScrollPane diaryPanel;
     JButton weekDaysName[] = new JButton[7];
     String WEEK_DAY_NAME[] = { "SUN", "MON", "TUE", "WED", "THR", "FRI", "SAT" };
     JPanel dateButton[][] = new JPanel[6][7];
@@ -58,12 +60,13 @@ public class mainPanel extends JFrame implements ActionListener {
         todayButton.setContentAreaFilled(false);
         todayButton.setPreferredSize(new Dimension(todayPage.getIconWidth(),todayPage.getIconHeight()));
         top_leftPanel.add(todayButton);
-
+        /*
+        시계 - 오른쪽
+        시계 작업 안함
+         */
         topPanel.add(top_leftPanel,BorderLayout.WEST);
         /*
-        메뉴, 리셋, 시계 순
-        메뉴, 리셋 - 왼쪽
-        시계 - 오른쪽
+        여기에 일정, 달력 순 생성
          */
 
         centrePanel = new JPanel(){
@@ -74,10 +77,6 @@ public class mainPanel extends JFrame implements ActionListener {
             }
         };
         centrePanel.setSize(1280,508);
-
-        /*
-        여기에 일정, 달력 순 생성
-         */
 
         calendarPanel = new JPanel();
         calendarPanel.setBackground(Color.WHITE);
@@ -106,10 +105,15 @@ public class mainPanel extends JFrame implements ActionListener {
         centrePanel.setLayout(new FlowLayout());
 
         leftPanel = new JPanel();
-        leftPanel.setLayout(new FlowLayout());
+        leftPanel.setLayout(new BorderLayout());
         leftPanel.setPreferredSize(new Dimension(420,500));
-        JLabel text = new JLabel("일정 표시할 자리");
-        leftPanel.add(text);
+        leftPanel.setBackground(Color.WHITE);
+
+        showDiary = new JPanel();
+        diaryPanel = new JScrollPane(showDiary);
+        diaryPanel.setPreferredSize(new Dimension(400,420));
+
+        leftPanel.add(diaryPanel,BorderLayout.PAGE_END);
 
         rightPanel = new JPanel();
         rightPanel.setLayout(new BorderLayout());
