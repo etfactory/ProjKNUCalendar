@@ -185,6 +185,7 @@ public class mainPanel extends calendarDataManager  implements ActionListener {
                 dateButton[i][j]=new JButton();
 
                 dateButs[i][j] = new JLabel();
+                dateButs[i][j].setHorizontalAlignment(JLabel.CENTER);
 
                 dateButton[i][j].setLayout(new BorderLayout());
                 dateButton[i][j].setBackground(new Color(250,250,250));
