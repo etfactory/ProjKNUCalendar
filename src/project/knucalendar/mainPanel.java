@@ -17,7 +17,7 @@ public class mainPanel extends calendarDataManager  implements ActionListener {
     JButton linkedKNU, linkedLMS, linkedSugang, menuButton, todayButton, lYearBut, rYearBut, lMonthBut, rMonthBut;
     JScrollPane diaryPanel;
     JButton weekDaysName[] = new JButton[7];
-    JLabel showMonth, showYear;
+    JLabel showMonth, showYear, selectedDate;
     String WEEK_DAY_NAME[] = { "SUN", "MON", "TUE", "WED", "THR", "FRI", "SAT" };
     JButton dateButton[][] = new JButton[6][7];
     JLabel dateButs[][] = new JLabel[6][7];
@@ -87,13 +87,19 @@ public class mainPanel extends calendarDataManager  implements ActionListener {
                 super.paintComponent(g);
             }
         };
-        centrePanel.setSize(1280,508);
+        centrePanel.setPreferredSize(new Dimension(normalBackground.getIconWidth(),normalBackground.getIconHeight()));
         centrePanel.setLayout(new FlowLayout());
 
         leftPanel = new JPanel();
         leftPanel.setLayout(new BorderLayout());
         leftPanel.setPreferredSize(new Dimension(420,500));
         leftPanel.setBackground(Color.WHITE);
+
+        selectedDate = new JLabel(calYear+"년 "+(calMonth+1)+"월 "+calDayOfMon+"일 (오늘)");
+        selectedDate.setFont(new Font("나눔바른고딕",Font.BOLD,13));
+        selectedDate.setHorizontalAlignment(JLabel.CENTER);
+
+        leftPanel.add(selectedDate,BorderLayout.PAGE_START);
 
         showDiary = new JPanel();
         diaryPanel = new JScrollPane(showDiary);
@@ -117,11 +123,11 @@ public class mainPanel extends calendarDataManager  implements ActionListener {
         showMonthNYear.setBackground(Color.WHITE);
         showMonthNYear.setLayout(new BorderLayout());
         showYear = new JLabel();
-        showYear.setFont(new Font("나눔고딕",Font.BOLD,10));
+        showYear.setFont(new Font("나눔바른고딕",Font.BOLD,15));
         showYear.setText(""+calYear+"");
         showYear.setHorizontalAlignment(JLabel.CENTER);
         showMonth = new JLabel();
-        showMonth.setFont(new Font("나눔고딕",Font.BOLD,30));
+        showMonth.setFont(new Font("나눔바른고딕",Font.BOLD,30));
         showMonth.setText(""+(calMonth+1)+"");
         showMonth.setHorizontalAlignment(JLabel.CENTER);
         showMonthNYear.add(showYear,BorderLayout.PAGE_START);
@@ -178,6 +184,7 @@ public class mainPanel extends calendarDataManager  implements ActionListener {
             weekDaysName[i].setBackground(new Color(225,225,225));
             weekDaysName[i].setOpaque(true);
             weekDaysName[i].setFocusPainted(false);
+            weekDaysName[i].setFont(new Font("나눔바른고딕",Font.BOLD,15));
             calendarPanel.add(weekDaysName[i]);
         }
         for(int i=0;i<6;i++){
@@ -186,6 +193,7 @@ public class mainPanel extends calendarDataManager  implements ActionListener {
 
                 dateButs[i][j] = new JLabel();
                 dateButs[i][j].setHorizontalAlignment(JLabel.CENTER);
+                dateButs[i][j].setFont(new Font("나눔바른고딕",Font.BOLD,15));
 
                 dateButton[i][j].setLayout(new BorderLayout());
                 dateButton[i][j].setBackground(new Color(250,250,250));
@@ -297,7 +305,7 @@ public class mainPanel extends calendarDataManager  implements ActionListener {
                     dateButs[i][j].setText("<html><font color=white>" + calDates[i][j] + "</font></html>");
                     dateButton[i][j].setToolTipText("오늘의 날짜");
                 }
-
+                dateButton[i][j].addActionListener(lForDateButs);
                 dateButton[i][j].add(dateButs[i][j], BorderLayout.CENTER);
                 calendarPanel.add(dateButton[i][j]);
             }
@@ -353,6 +361,40 @@ public class mainPanel extends calendarDataManager  implements ActionListener {
     }
     private class listenForDateButs implements ActionListener{
         public void actionPerformed(ActionEvent e) {
+            int k=0, l=0, newCalDayOfMon=0;
+            for(int i=0;i<6;i++){
+                for(int j=0;j<7;j++){
+                    if(e.getSource()==dateButton[i][j]){
+                        k=i; l=j;
+                    }
+                }
+            }
+
+            if(!(k==0&&l==0))
+                newCalDayOfMon = calDates[k][l];
+
+            if(!(newCalDayOfMon==0))
+                calendar = new GregorianCalendar(calYear,calMonth,newCalDayOfMon);
+            else
+                calendar = new GregorianCalendar(calYear,calMonth,calDayOfMon);
+
+            String dDayString = new String();
+
+            int dDay=((int)((calendar.getTimeInMillis() - today.getTimeInMillis())/1000/60/60/24));
+            if(dDay == 0 && (calendar.get(Calendar.YEAR) == today.get(Calendar.YEAR))
+                    && (calendar.get(Calendar.MONTH) == today.get(Calendar.MONTH))
+                    && (calendar.get(Calendar.DAY_OF_MONTH) == today.get(Calendar.DAY_OF_MONTH)))
+                dDayString = "오늘";
+            else if(dDay >=0)
+                dDayString = "D-"+(dDay+1);
+            else if(dDay < 0)
+                dDayString = "D+"+(dDay)*(-1);
+
+            if(!(newCalDayOfMon==0)) {
+                selectedDate.setText(calYear + "년 " + (calMonth + 1) + "월 " + newCalDayOfMon + "일 (" + dDayString + ")");
+                calDayOfMon = newCalDayOfMon;
+            } else
+                selectedDate.setText(calYear+"년 "+(calMonth+1)+"월 "+calDayOfMon+"일 ("+dDayString+")");
 
         }
     }
