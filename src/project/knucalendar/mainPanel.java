@@ -18,13 +18,14 @@ public class mainPanel extends calendarDataManager  implements ActionListener {
     JScrollPane diaryPanel;
     JButton weekDaysName[] = new JButton[7];
     String WEEK_DAY_NAME[] = { "SUN", "MON", "TUE", "WED", "THR", "FRI", "SAT" };
-    JPanel dateButton[][] = new JPanel[6][7];
+    JButton dateButton[][] = new JButton[6][7];
     JLabel dateButs[][] = new JLabel[6][7];
     listenForDateButs lForDateButs = new listenForDateButs();
     ListenForCalOpButtons lForCalOpButtons = new ListenForCalOpButtons();
     ImageIcon icon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/icon/bear/bearVersion1_1.png")));
     ImageIcon normalBackground = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/background (1280x720)/centre.png")));
     ImageIcon bottomNormal = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/background (1280x720)/bottom.png")));
+    ImageIcon top = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/background (1280x720)/top.png")));
     ImageIcon KNUPage = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/button/KNUPage.png")));
     ImageIcon LMSPage = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/button/LMSPage.png")));
     ImageIcon SugangPage = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/button/수강신청.png")));
@@ -43,7 +44,7 @@ public class mainPanel extends calendarDataManager  implements ActionListener {
         mainFrame.setLayout(new BorderLayout(0,0));
 
         topPanel = new JPanel();
-        topPanel.setPreferredSize(new Dimension(1280,76));
+        topPanel.setPreferredSize(new Dimension(1280,top.getIconHeight()-24));
         topPanel.setBackground(Color.WHITE);
         topPanel.setLayout(new BorderLayout());
 
@@ -99,12 +100,13 @@ public class mainPanel extends calendarDataManager  implements ActionListener {
         }
         for(int i=0;i<6;i++){
             for(int j=0;j<7;j++){
-                dateButton[i][j]=new JPanel();
+                dateButton[i][j]=new JButton();
 
                 dateButs[i][j] = new JLabel();
 
                 dateButton[i][j].setLayout(new BorderLayout());
                 dateButton[i][j].setBackground(new Color(250,250,250));
+                dateButton[i][j].setBorderPainted(false);
                 dateButton[i][j].setOpaque(true);
 
                 if (calDates[i][j]==0)
@@ -117,7 +119,7 @@ public class mainPanel extends calendarDataManager  implements ActionListener {
                         calDates[i][j] == today.get(Calendar.DAY_OF_MONTH)){
                     dateButton[i][j].setBackground(new Color(5,62,143));
                     dateButs[i][j].setText("<html><font color=white>"+calDates[i][j]+"</font></html>");
-                    dateButs[i][j].setToolTipText("오늘");
+                    dateButton[i][j].setToolTipText("오늘의 날짜");
                 }
 
                 dateButton[i][j].add(dateButs[i][j],BorderLayout.CENTER);
@@ -161,16 +163,19 @@ public class mainPanel extends calendarDataManager  implements ActionListener {
         linkedKNU.setBorderPainted(false);
         linkedKNU.setContentAreaFilled(false);
         linkedKNU.addActionListener(this);
+        linkedKNU.setPreferredSize(new Dimension(KNUPage.getIconWidth(), KNUPage.getIconHeight()));
         linkedLMS = new JButton(LMSPage);
         linkedLMS.setFocusPainted(false);
         linkedLMS.setBorderPainted(false);
         linkedLMS.setContentAreaFilled(false);
         linkedLMS.addActionListener(this);
+        linkedLMS.setPreferredSize(new Dimension(LMSPage.getIconWidth(), LMSPage.getIconHeight()));
         linkedSugang = new JButton(SugangPage);
         linkedSugang.setFocusPainted(false);
         linkedSugang.setBorderPainted(false);
         linkedSugang.setContentAreaFilled(false);
         linkedSugang.addActionListener(this);
+        linkedSugang.setPreferredSize(new Dimension(SugangPage.getIconWidth(), SugangPage.getIconHeight()));
         bottomPanel.add(linkedKNU);
         bottomPanel.add(linkedLMS);
         bottomPanel.add(linkedSugang);
