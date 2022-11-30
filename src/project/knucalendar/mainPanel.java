@@ -317,6 +317,8 @@ public class mainPanel extends calendarDataManager  implements ActionListener {
                 setToday();
                 lForDateButs.actionPerformed(e);
                 focusToday();
+                showYear.setText(""+calYear+"");
+                showMonth.setText(""+(calMonth+1)+"");
             } else if(e.getSource() == lYearBut){
                 delCal();
                 moveMonth(-12);
