@@ -314,6 +314,7 @@ public class mainPanel extends calendarDataManager  implements ActionListener {
     private class ListenForCalOpButtons implements ActionListener{
         public void actionPerformed(ActionEvent e) {
             if(e.getSource() == todayButton){
+                delCal();
                 setToday();
                 lForDateButs.actionPerformed(e);
                 focusToday();
