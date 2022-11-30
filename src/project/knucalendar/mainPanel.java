@@ -103,16 +103,24 @@ public class mainPanel extends calendarDataManager  implements ActionListener {
 
                 dateButs[i][j] = new JLabel();
 
+                dateButton[i][j].setLayout(new BorderLayout());
+                dateButton[i][j].setBackground(new Color(250,250,250));
+                dateButton[i][j].setOpaque(true);
+
                 if (calDates[i][j]==0)
                     dateButs[i][j].setText("");
                 else
                     dateButs[i][j].setText(""+calDates[i][j]+"");
 
-                dateButton[i][j].setLayout(new BorderLayout());
-                dateButton[i][j].setBackground(new Color(250,250,250));
-                dateButton[i][j].setOpaque(true);
+                if (calMonth==today.get(Calendar.MONTH) &&
+                        calYear == today.get(Calendar.YEAR) &&
+                        calDates[i][j] == today.get(Calendar.DAY_OF_MONTH)){
+                    dateButton[i][j].setBackground(new Color(5,62,143));
+                    dateButs[i][j].setText("<html><font color=white>"+calDates[i][j]+"</font></html>");
+                    dateButs[i][j].setToolTipText("오늘");
+                }
 
-                dateButton[i][j].add(dateButs[i][j],BorderLayout.EAST);
+                dateButton[i][j].add(dateButs[i][j],BorderLayout.CENTER);
                 calendarPanel.add(dateButton[i][j]);
             }
         }
