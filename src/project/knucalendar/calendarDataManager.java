@@ -9,7 +9,7 @@ public class calendarDataManager {
     int calDates[][] = new int[CAL_HEIGHT][CAL_WIDTH];
     int calYear;
     int calMonth;
-    int calDayOfMonth;
+    int calDayOfMon;
     final int calLastDateOfMonth[] = {31,28,31,30,31,30,31,31,30,31,30,31};
     int calLastDate;
     Calendar today = Calendar.getInstance();
@@ -22,7 +22,7 @@ public class calendarDataManager {
     public void setToday(){
         calYear = today.get(Calendar.YEAR);
         calMonth = today.get(Calendar.MONTH);
-        calDayOfMonth = today.get(Calendar.DAY_OF_MONTH);
+        calDayOfMon = today.get(Calendar.DAY_OF_MONTH);
         makeCalendarData(today);
     }
 
@@ -61,7 +61,7 @@ public class calendarDataManager {
                 calYear--;
                 calMonth+=12;
             }
-        calendar = new GregorianCalendar(calYear,calMonth,calDayOfMonth);
+        calendar = new GregorianCalendar(calYear,calMonth,calDayOfMon);
         makeCalendarData(calendar);
     }
 }

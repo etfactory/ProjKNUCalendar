@@ -5,10 +5,12 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.net.*;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
-public class mainPanel extends JFrame implements ActionListener {
+public class mainPanel extends calendarDataManager  implements ActionListener {
     final String title = "KNU Calendar Program";
     JFrame mainFrame;
     JPanel centrePanel, topPanel, bottomPanel, calendarPanel, showDiary, rightPanel, leftPanel, top_leftPanel, top_rightPanel;
@@ -17,6 +19,9 @@ public class mainPanel extends JFrame implements ActionListener {
     JButton weekDaysName[] = new JButton[7];
     String WEEK_DAY_NAME[] = { "SUN", "MON", "TUE", "WED", "THR", "FRI", "SAT" };
     JPanel dateButton[][] = new JPanel[6][7];
+    JLabel dateButs[][] = new JLabel[6][7];
+    listenForDateButs lForDateButs = new listenForDateButs();
+    ListenForCalOpButtons lForCalOpButtons = new ListenForCalOpButtons();
     ImageIcon icon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/icon/bear/bearVersion1_1.png")));
     ImageIcon normalBackground = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/background (1280x720)/centre.png")));
     ImageIcon bottomNormal = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/background (1280x720)/bottom.png")));
@@ -58,6 +63,7 @@ public class mainPanel extends JFrame implements ActionListener {
         todayButton.setBorderPainted(false);
         todayButton.setContentAreaFilled(false);
         todayButton.setPreferredSize(new Dimension(todayPage.getIconWidth(),todayPage.getIconHeight()));
+        todayButton.addActionListener(lForCalOpButtons);
         top_leftPanel.add(todayButton);
         /*
         시계 - 오른쪽
@@ -94,9 +100,19 @@ public class mainPanel extends JFrame implements ActionListener {
         for(int i=0;i<6;i++){
             for(int j=0;j<7;j++){
                 dateButton[i][j]=new JPanel();
+
+                dateButs[i][j] = new JLabel();
+
+                if (calDates[i][j]==0)
+                    dateButs[i][j].setText("");
+                else
+                    dateButs[i][j].setText(""+calDates[i][j]+"");
+
                 dateButton[i][j].setLayout(new BorderLayout());
                 dateButton[i][j].setBackground(new Color(250,250,250));
                 dateButton[i][j].setOpaque(true);
+
+                dateButton[i][j].add(dateButs[i][j],BorderLayout.EAST);
                 calendarPanel.add(dateButton[i][j]);
             }
         }
@@ -194,6 +210,32 @@ public class mainPanel extends JFrame implements ActionListener {
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
+        }
+    }
+    private void focusToday(){
+        if(today.get(Calendar.DAY_OF_WEEK) == 1)
+            dateButton[today.get(Calendar.WEEK_OF_MONTH)][today.get(Calendar.DAY_OF_WEEK)-1].requestFocusInWindow();
+        else
+            dateButton[today.get(Calendar.WEEK_OF_MONTH)-1][today.get(Calendar.DAY_OF_WEEK)-1].requestFocusInWindow();
+    }
+    private class ListenForCalOpButtons implements ActionListener{
+        public void actionPerformed(ActionEvent e) {
+            if(e.getSource() == todayButton){
+                setToday();
+                lForDateButs.actionPerformed(e);
+                focusToday();
+            }
+            /*
+            else if(e.getSource() == lYearBut) moveMonth(-12);
+            else if(e.getSource() == lMonBut) moveMonth(-1);
+            else if(e.getSource() == nMonBut) moveMonth(1);
+            else if(e.getSource() == nYearBut) moveMonth(12);
+             */
+        }
+    }
+    private class listenForDateButs implements ActionListener{
+        public void actionPerformed(ActionEvent e) {
+
         }
     }
 }
