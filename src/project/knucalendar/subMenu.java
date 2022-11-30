@@ -69,7 +69,7 @@ public class subMenu implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == darkOnOff) {
             try {
-
+                new willBeUpdate();
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -95,13 +95,13 @@ public class subMenu implements ActionListener {
             }
         } else if (e.getSource() == resetProgram) {
             try {
-
+                new resetProgram();
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
         } else if (e.getSource() == progInfo) {
             try {
-
+                new infoFrame();
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
