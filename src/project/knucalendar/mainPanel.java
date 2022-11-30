@@ -5,7 +5,6 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.File;
 import java.net.*;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -14,7 +13,7 @@ public class mainPanel extends calendarDataManager  implements ActionListener {
     final String title = "KNU Calendar Program";
     JFrame mainFrame;
     JPanel centrePanel, topPanel, bottomPanel, calendarPanel, showDiary, rightPanel, leftPanel, top_leftPanel, top_rightPanel, calendarTopPanel;
-    JButton linkedKNU, linkedLMS, linkedSugang, menuButton, todayButton, lYearBut, rYearBut, lMonthBut, rMonthBut;
+    JButton linkedKNU, linkedLMS, linkedSugang, menuButton, todayButton, lYearBut, rYearBut, lMonthBut, rMonthBut, openAddData;
     JScrollPane diaryPanel;
     JButton weekDaysName[] = new JButton[7];
     JLabel showMonth, showYear, selectedDate;
@@ -96,10 +95,15 @@ public class mainPanel extends calendarDataManager  implements ActionListener {
         leftPanel.setBackground(Color.WHITE);
 
         selectedDate = new JLabel(calYear+"년 "+(calMonth+1)+"월 "+calDayOfMon+"일 (오늘)");
-        selectedDate.setFont(new Font("나눔바른고딕",Font.BOLD,13));
+        selectedDate.setFont(new Font("나눔바른고딕",Font.BOLD,20));
         selectedDate.setHorizontalAlignment(JLabel.CENTER);
 
-        leftPanel.add(selectedDate,BorderLayout.PAGE_START);
+        openAddData = new JButton("+");
+        openAddData.setFont(new Font("나눔바른고딕",Font.BOLD,15));
+        openAddData.addActionListener(this);
+
+        leftPanel.add(openAddData,BorderLayout.EAST);
+        leftPanel.add(selectedDate,BorderLayout.CENTER);
 
         showDiary = new JPanel();
         diaryPanel = new JScrollPane(showDiary);
@@ -285,6 +289,12 @@ public class mainPanel extends calendarDataManager  implements ActionListener {
         } else if (e.getSource() == menuButton) {
             try {
                 new subMenu();
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        } else if (e.getSource() == openAddData) {
+            try {
+                new addData();
             } catch (Exception ex) {
                 ex.printStackTrace();
             }

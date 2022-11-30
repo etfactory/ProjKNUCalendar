@@ -17,6 +17,7 @@ public class willBeUpdate {
         willBeUpdate.setVisible(true);
 
         JLabel messageNotice = new JLabel("업데이트 예정입니다.");
+        messageNotice.setHorizontalAlignment(JLabel.CENTER);
 
         willBeUpdate.add(messageNotice,BorderLayout.CENTER);
     }
