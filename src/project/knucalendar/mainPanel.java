@@ -17,10 +17,12 @@ public class mainPanel extends calendarDataManager  implements ActionListener {
     JButton linkedKNU, linkedLMS, linkedSugang, menuButton, todayButton, lYearBut, rYearBut, lMonthBut, rMonthBut;
     JScrollPane diaryPanel;
     JButton weekDaysName[] = new JButton[7];
+    JLabel showMonth, showYear;
     String WEEK_DAY_NAME[] = { "SUN", "MON", "TUE", "WED", "THR", "FRI", "SAT" };
     JButton dateButton[][] = new JButton[6][7];
     JLabel dateButs[][] = new JLabel[6][7];
     listenForDateButs lForDateButs = new listenForDateButs();
+    ListenForCalOpButtons lForCalOpButtons = new ListenForCalOpButtons();
     ImageIcon icon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/icon/bear/bearVersion1_1.png")));
     ImageIcon normalBackground = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/background (1280x720)/centre.png")));
     ImageIcon bottomNormal = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/background (1280x720)/bottom.png")));
@@ -67,7 +69,7 @@ public class mainPanel extends calendarDataManager  implements ActionListener {
         todayButton.setBorderPainted(false);
         todayButton.setContentAreaFilled(false);
         todayButton.setPreferredSize(new Dimension(todayPage.getIconWidth(),todayPage.getIconHeight()));
-        todayButton.addActionListener(this);
+        todayButton.addActionListener(lForCalOpButtons);
         top_leftPanel.add(todayButton);
         /*
         시계 - 오른쪽
@@ -114,11 +116,11 @@ public class mainPanel extends calendarDataManager  implements ActionListener {
         JPanel showMonthNYear = new JPanel();
         showMonthNYear.setBackground(Color.WHITE);
         showMonthNYear.setLayout(new BorderLayout());
-        JLabel showYear = new JLabel();
+        showYear = new JLabel();
         showYear.setFont(new Font("나눔고딕",Font.BOLD,10));
         showYear.setText(""+calYear+"");
         showYear.setHorizontalAlignment(JLabel.CENTER);
-        JLabel showMonth = new JLabel();
+        showMonth = new JLabel();
         showMonth.setFont(new Font("나눔고딕",Font.BOLD,30));
         showMonth.setText(""+(calMonth+1)+"");
         showMonth.setHorizontalAlignment(JLabel.CENTER);
@@ -130,28 +132,28 @@ public class mainPanel extends calendarDataManager  implements ActionListener {
         lYearBut.setFocusPainted(false);
         lYearBut.setBorderPainted(false);
         lYearBut.setContentAreaFilled(false);
-        lYearBut.addActionListener(this);
+        lYearBut.addActionListener(lForCalOpButtons);
 
         lMonthBut = new JButton(monthLeft);
         lMonthBut.setPreferredSize(new Dimension(monthLeft.getIconWidth(),monthLeft.getIconHeight()));
         lMonthBut.setFocusPainted(false);
         lMonthBut.setBorderPainted(false);
         lMonthBut.setContentAreaFilled(false);
-        lMonthBut.addActionListener(this);
+        lMonthBut.addActionListener(lForCalOpButtons);
 
         rYearBut = new JButton(yearRight);
         rYearBut.setPreferredSize(new Dimension(yearRight.getIconWidth(),yearRight.getIconHeight()));
         rYearBut.setFocusPainted(false);
         rYearBut.setBorderPainted(false);
         rYearBut.setContentAreaFilled(false);
-        rYearBut.addActionListener(this);
+        rYearBut.addActionListener(lForCalOpButtons);
 
         rMonthBut = new JButton(monthRight);
         rMonthBut.setPreferredSize(new Dimension(monthRight.getIconWidth(),monthRight.getIconHeight()));
         rMonthBut.setFocusPainted(false);
         rMonthBut.setBorderPainted(false);
         rMonthBut.setContentAreaFilled(false);
-        rMonthBut.addActionListener(this);
+        rMonthBut.addActionListener(lForCalOpButtons);
 
         leftButtons.add(lYearBut);
         leftButtons.add(lMonthBut);
@@ -300,18 +302,42 @@ public class mainPanel extends calendarDataManager  implements ActionListener {
             }
         }
     }
+    private void delCal(){
+        for(int i=0;i<6;i++) {
+            for (int j = 0; j < 7; j++) {
+                calDates[i][j]=0;
+                dateButs[i][j].setText("");
+                dateButton[i][j].setBackground(new Color(250,250,250));
+            }
+        }
+    }
     private class ListenForCalOpButtons implements ActionListener{
         public void actionPerformed(ActionEvent e) {
             if(e.getSource() == todayButton){
                 setToday();
                 lForDateButs.actionPerformed(e);
                 focusToday();
+            } else if(e.getSource() == lYearBut){
+                delCal();
+                moveMonth(-12);
+                showYear.setText(""+calYear+"");
+                showMonth.setText(""+(calMonth+1)+"");
+            } else if(e.getSource() == lMonthBut){
+                delCal();
+                moveMonth(-1);
+                showYear.setText(""+calYear+"");
+                showMonth.setText(""+(calMonth+1)+"");
+            } else if(e.getSource() == rMonthBut){
+                delCal();
+                moveMonth(1);
+                showYear.setText(""+calYear+"");
+                showMonth.setText(""+(calMonth+1)+"");
+            } else if(e.getSource() == rYearBut){
+                delCal();
+                moveMonth(12);
+                showYear.setText(""+calYear+"");
+                showMonth.setText(""+(calMonth+1)+"");
             }
-            else if(e.getSource() == lYearBut) moveMonth(-12);
-            else if(e.getSource() == lMonthBut) moveMonth(-1);
-            else if(e.getSource() == rMonthBut) moveMonth(1);
-            else if(e.getSource() == rYearBut) moveMonth(12);
-
             showCal();
         }
     }
