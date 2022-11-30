@@ -37,7 +37,8 @@ public class calendarDataManager {
             if(i == 0) k = calStartingPos;
             else k = 0;
             for(int j = k ; j<CAL_WIDTH ; j++){
-                if(num <= calLastDate) calDates[i][j]=num++;
+                if(num <= calLastDate)
+                    calDates[i][j]=num++;
             }
         }
     }

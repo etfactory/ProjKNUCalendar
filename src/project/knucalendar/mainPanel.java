@@ -13,15 +13,14 @@ import java.util.GregorianCalendar;
 public class mainPanel extends calendarDataManager  implements ActionListener {
     final String title = "KNU Calendar Program";
     JFrame mainFrame;
-    JPanel centrePanel, topPanel, bottomPanel, calendarPanel, showDiary, rightPanel, leftPanel, top_leftPanel, top_rightPanel;
-    JButton linkedKNU, linkedLMS, linkedSugang, menuButton, todayButton;
+    JPanel centrePanel, topPanel, bottomPanel, calendarPanel, showDiary, rightPanel, leftPanel, top_leftPanel, top_rightPanel, calendarTopPanel;
+    JButton linkedKNU, linkedLMS, linkedSugang, menuButton, todayButton, lYearBut, rYearBut, lMonthBut, rMonthBut;
     JScrollPane diaryPanel;
     JButton weekDaysName[] = new JButton[7];
     String WEEK_DAY_NAME[] = { "SUN", "MON", "TUE", "WED", "THR", "FRI", "SAT" };
     JButton dateButton[][] = new JButton[6][7];
     JLabel dateButs[][] = new JLabel[6][7];
     listenForDateButs lForDateButs = new listenForDateButs();
-    ListenForCalOpButtons lForCalOpButtons = new ListenForCalOpButtons();
     ImageIcon icon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/icon/bear/bearVersion1_1.png")));
     ImageIcon normalBackground = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/background (1280x720)/centre.png")));
     ImageIcon bottomNormal = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/background (1280x720)/bottom.png")));
@@ -31,6 +30,10 @@ public class mainPanel extends calendarDataManager  implements ActionListener {
     ImageIcon SugangPage = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/button/수강신청.png")));
     ImageIcon menuPage = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/button/menuButton.png")));
     ImageIcon todayPage = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/button/homeButton.png")));
+    ImageIcon monthLeft = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/button/monthleft.png")));
+    ImageIcon monthRight = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/button/monthright.png")));
+    ImageIcon yearLeft = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/button/yearleft.png")));
+    ImageIcon yearRight = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/button/yearright.png")));
 
     public mainPanel(){
         mainFrame = new JFrame(title);
@@ -64,7 +67,7 @@ public class mainPanel extends calendarDataManager  implements ActionListener {
         todayButton.setBorderPainted(false);
         todayButton.setContentAreaFilled(false);
         todayButton.setPreferredSize(new Dimension(todayPage.getIconWidth(),todayPage.getIconHeight()));
-        todayButton.addActionListener(lForCalOpButtons);
+        todayButton.addActionListener(this);
         top_leftPanel.add(todayButton);
         /*
         시계 - 오른쪽
@@ -83,11 +86,88 @@ public class mainPanel extends calendarDataManager  implements ActionListener {
             }
         };
         centrePanel.setSize(1280,508);
+        centrePanel.setLayout(new FlowLayout());
+
+        leftPanel = new JPanel();
+        leftPanel.setLayout(new BorderLayout());
+        leftPanel.setPreferredSize(new Dimension(420,500));
+        leftPanel.setBackground(Color.WHITE);
+
+        showDiary = new JPanel();
+        diaryPanel = new JScrollPane(showDiary);
+        diaryPanel.setPreferredSize(new Dimension(400,420));
+
+        leftPanel.add(diaryPanel,BorderLayout.PAGE_END);
+
+        calendarTopPanel = new JPanel();
+        calendarTopPanel.setBackground(Color.WHITE);
+        calendarTopPanel.setLayout(new BorderLayout());
+
+        JPanel leftButtons = new JPanel();
+        leftButtons.setBackground(Color.WHITE);
+        leftButtons.setLayout(new FlowLayout());
+
+        JPanel rightButtons = new JPanel();
+        rightButtons.setBackground(Color.WHITE);
+        rightButtons.setLayout(new FlowLayout());
+
+        JPanel showMonthNYear = new JPanel();
+        showMonthNYear.setBackground(Color.WHITE);
+        showMonthNYear.setLayout(new BorderLayout());
+        JLabel showYear = new JLabel();
+        showYear.setFont(new Font("나눔고딕",Font.BOLD,10));
+        showYear.setText(""+calYear+"");
+        showYear.setHorizontalAlignment(JLabel.CENTER);
+        JLabel showMonth = new JLabel();
+        showMonth.setFont(new Font("나눔고딕",Font.BOLD,30));
+        showMonth.setText(""+(calMonth+1)+"");
+        showMonth.setHorizontalAlignment(JLabel.CENTER);
+        showMonthNYear.add(showYear,BorderLayout.PAGE_START);
+        showMonthNYear.add(showMonth,BorderLayout.CENTER);
+
+        lYearBut = new JButton(yearLeft);
+        lYearBut.setPreferredSize(new Dimension(yearLeft.getIconWidth(),yearLeft.getIconHeight()));
+        lYearBut.setFocusPainted(false);
+        lYearBut.setBorderPainted(false);
+        lYearBut.setContentAreaFilled(false);
+        lYearBut.addActionListener(this);
+
+        lMonthBut = new JButton(monthLeft);
+        lMonthBut.setPreferredSize(new Dimension(monthLeft.getIconWidth(),monthLeft.getIconHeight()));
+        lMonthBut.setFocusPainted(false);
+        lMonthBut.setBorderPainted(false);
+        lMonthBut.setContentAreaFilled(false);
+        lMonthBut.addActionListener(this);
+
+        rYearBut = new JButton(yearRight);
+        rYearBut.setPreferredSize(new Dimension(yearRight.getIconWidth(),yearRight.getIconHeight()));
+        rYearBut.setFocusPainted(false);
+        rYearBut.setBorderPainted(false);
+        rYearBut.setContentAreaFilled(false);
+        rYearBut.addActionListener(this);
+
+        rMonthBut = new JButton(monthRight);
+        rMonthBut.setPreferredSize(new Dimension(monthRight.getIconWidth(),monthRight.getIconHeight()));
+        rMonthBut.setFocusPainted(false);
+        rMonthBut.setBorderPainted(false);
+        rMonthBut.setContentAreaFilled(false);
+        rMonthBut.addActionListener(this);
+
+        leftButtons.add(lYearBut);
+        leftButtons.add(lMonthBut);
+
+        rightButtons.add(rMonthBut);
+        rightButtons.add(rYearBut);
+
+        calendarTopPanel.add(showMonthNYear,BorderLayout.CENTER);
+        calendarTopPanel.add(leftButtons,BorderLayout.WEST);
+        calendarTopPanel.add(rightButtons,BorderLayout.EAST);
 
         calendarPanel = new JPanel();
         calendarPanel.setBackground(Color.WHITE);
         calendarPanel.setLayout(new GridLayout(0,7,5,5));
         calendarPanel.setPreferredSize(new Dimension(600,420));
+
         for(int i=0;i<7;i++){
             weekDaysName[i] =new JButton(WEEK_DAY_NAME[i]);
             weekDaysName[i].setBorderPainted(false);
@@ -108,42 +188,16 @@ public class mainPanel extends calendarDataManager  implements ActionListener {
                 dateButton[i][j].setBackground(new Color(250,250,250));
                 dateButton[i][j].setBorderPainted(false);
                 dateButton[i][j].setOpaque(true);
-
-                if (calDates[i][j]==0)
-                    dateButs[i][j].setText("");
-                else
-                    dateButs[i][j].setText(""+calDates[i][j]+"");
-
-                if (calMonth==today.get(Calendar.MONTH) &&
-                        calYear == today.get(Calendar.YEAR) &&
-                        calDates[i][j] == today.get(Calendar.DAY_OF_MONTH)){
-                    dateButton[i][j].setBackground(new Color(5,62,143));
-                    dateButs[i][j].setText("<html><font color=white>"+calDates[i][j]+"</font></html>");
-                    dateButton[i][j].setToolTipText("오늘의 날짜");
-                }
-
-                dateButton[i][j].add(dateButs[i][j],BorderLayout.CENTER);
-                calendarPanel.add(dateButton[i][j]);
             }
         }
+        showCal();
         calendarPanel.setBorder(new LineBorder(Color.WHITE, 2, true));
-        centrePanel.setLayout(new FlowLayout());
-
-        leftPanel = new JPanel();
-        leftPanel.setLayout(new BorderLayout());
-        leftPanel.setPreferredSize(new Dimension(420,500));
-        leftPanel.setBackground(Color.WHITE);
-
-        showDiary = new JPanel();
-        diaryPanel = new JScrollPane(showDiary);
-        diaryPanel.setPreferredSize(new Dimension(400,420));
-
-        leftPanel.add(diaryPanel,BorderLayout.PAGE_END);
 
         rightPanel = new JPanel();
         rightPanel.setLayout(new BorderLayout());
         rightPanel.setBackground(Color.WHITE);
         rightPanel.setPreferredSize(new Dimension(620,500));
+        rightPanel.add(calendarTopPanel,BorderLayout.PAGE_START);
         rightPanel.add(calendarPanel,BorderLayout.PAGE_END);
 
         centrePanel.add(leftPanel);
@@ -225,11 +279,26 @@ public class mainPanel extends calendarDataManager  implements ActionListener {
             }
         }
     }
-    private void focusToday(){
-        if(today.get(Calendar.DAY_OF_WEEK) == 1)
-            dateButton[today.get(Calendar.WEEK_OF_MONTH)][today.get(Calendar.DAY_OF_WEEK)-1].requestFocusInWindow();
-        else
-            dateButton[today.get(Calendar.WEEK_OF_MONTH)-1][today.get(Calendar.DAY_OF_WEEK)-1].requestFocusInWindow();
+    private void showCal(){
+        for(int i=0;i<6;i++) {
+            for (int j = 0; j < 7; j++) {
+                if (calDates[i][j] == 0)
+                    dateButs[i][j].setText("");
+                else
+                    dateButs[i][j].setText("" + calDates[i][j] + "");
+
+                if (calMonth == today.get(Calendar.MONTH) &&
+                        calYear == today.get(Calendar.YEAR) &&
+                        calDates[i][j] == today.get(Calendar.DAY_OF_MONTH)) {
+                    dateButton[i][j].setBackground(new Color(5, 62, 143));
+                    dateButs[i][j].setText("<html><font color=white>" + calDates[i][j] + "</font></html>");
+                    dateButton[i][j].setToolTipText("오늘의 날짜");
+                }
+
+                dateButton[i][j].add(dateButs[i][j], BorderLayout.CENTER);
+                calendarPanel.add(dateButton[i][j]);
+            }
+        }
     }
     private class ListenForCalOpButtons implements ActionListener{
         public void actionPerformed(ActionEvent e) {
@@ -238,13 +307,19 @@ public class mainPanel extends calendarDataManager  implements ActionListener {
                 lForDateButs.actionPerformed(e);
                 focusToday();
             }
-            /*
             else if(e.getSource() == lYearBut) moveMonth(-12);
-            else if(e.getSource() == lMonBut) moveMonth(-1);
-            else if(e.getSource() == nMonBut) moveMonth(1);
-            else if(e.getSource() == nYearBut) moveMonth(12);
-             */
+            else if(e.getSource() == lMonthBut) moveMonth(-1);
+            else if(e.getSource() == rMonthBut) moveMonth(1);
+            else if(e.getSource() == rYearBut) moveMonth(12);
+
+            showCal();
         }
+    }
+    private void focusToday(){
+        if(today.get(Calendar.DAY_OF_WEEK) == 1)
+            dateButton[today.get(Calendar.WEEK_OF_MONTH)][today.get(Calendar.DAY_OF_WEEK)-1].requestFocusInWindow();
+        else
+            dateButton[today.get(Calendar.WEEK_OF_MONTH)-1][today.get(Calendar.DAY_OF_WEEK)-1].requestFocusInWindow();
     }
     private class listenForDateButs implements ActionListener{
         public void actionPerformed(ActionEvent e) {
