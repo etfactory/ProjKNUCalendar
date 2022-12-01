@@ -383,29 +383,24 @@ public class mainPanel extends calendarDataManager  implements ActionListener {
             if(!(k==0&&l==0))
                 newCalDayOfMon = calDates[k][l];
 
-            if(!(newCalDayOfMon==0))
-                calendar = new GregorianCalendar(calYear,calMonth,newCalDayOfMon);
-            else
-                calendar = new GregorianCalendar(calYear,calMonth,calDayOfMon);
-
-            String dDayString = new String();
-
-            int dDay=((int)((calendar.getTimeInMillis() - today.getTimeInMillis())/1000/60/60/24));
-            if(dDay == 0 && (calendar.get(Calendar.YEAR) == today.get(Calendar.YEAR))
-                    && (calendar.get(Calendar.MONTH) == today.get(Calendar.MONTH))
-                    && (calendar.get(Calendar.DAY_OF_MONTH) == today.get(Calendar.DAY_OF_MONTH)))
-                dDayString = "오늘";
-            else if(dDay >=0)
-                dDayString = "D-"+(dDay+1);
-            else if(dDay < 0)
-                dDayString = "D+"+(dDay)*(-1);
-
             if(!(newCalDayOfMon==0)) {
+                calendar = new GregorianCalendar(calYear, calMonth, newCalDayOfMon);
+
+                String dDayString = new String();
+
+                int dDay=((int)((calendar.getTimeInMillis() - today.getTimeInMillis())/1000/60/60/24));
+                if(dDay == 0 && (calendar.get(Calendar.YEAR) == today.get(Calendar.YEAR))
+                        && (calendar.get(Calendar.MONTH) == today.get(Calendar.MONTH))
+                        && (calendar.get(Calendar.DAY_OF_MONTH) == today.get(Calendar.DAY_OF_MONTH)))
+                    dDayString = "오늘";
+                else if(dDay >=0)
+                    dDayString = "D-"+(dDay+1);
+                else if(dDay < 0)
+                    dDayString = "D+"+(dDay)*(-1);
+
                 selectedDate.setText(calYear + "년 " + (calMonth + 1) + "월 " + newCalDayOfMon + "일 (" + dDayString + ")");
                 calDayOfMon = newCalDayOfMon;
-            } else
-                selectedDate.setText(calYear+"년 "+(calMonth+1)+"월 "+calDayOfMon+"일 ("+dDayString+")");
-
+            }
         }
     }
 }
