@@ -5,19 +5,20 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class addData implements ActionListener {
+public class addData extends calendarDataManager implements ActionListener {
     JFrame addData, errorMessage, checkSave;
     JPanel textPanel, areaPanel, buttonPanel, diaryTA, dataPanel, underDataPanel;
     JLabel name, kind, string, diary, where;
     JTextArea nameta, stringta, startta, endta, whereta;
     JComboBox kindbox;
     JLabel errorNotice;
-    JButton saveButton, cancelButton, okSign;
-    String nameData, kindData, startdateData, enddateData, whereData, stringData;
+    JButton saveButton, cancelButton, okSign, exit;
+    String nameData, kindData, startdateData, enddateData, whereData, stringData, setAddZero;
     int getStartYear,getStartMonth, getStartDateofMonth, getEndYear, getEndMonth, getEndDateofMonth, getStartDate, getEndDate;
     String[] arr = {"학사일정","시험","과제","개인일정"};
     ImageIcon icon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/icon/bear/bearVersion1_1.png")));
     public addData() {
+        checkZero();
         addData = new JFrame();
         addData.setSize(700,400);
         addData.setLocationRelativeTo(null);
@@ -64,10 +65,10 @@ public class addData implements ActionListener {
         kindbox = new JComboBox(arr);
         kindbox.setPreferredSize(new Dimension(500,30));
         kindbox.setFont(new Font("나눔바른고딕",Font.BOLD,17));
-        startta = new JTextArea();
+        startta = new JTextArea(calYear+""+calMonth+""+setAddZero);
         startta.setPreferredSize(new Dimension(200,30));
         startta.setFont(new Font("나눔바른고딕",Font.BOLD,20));
-        endta = new JTextArea();
+        endta = new JTextArea(calYear+""+calMonth+""+setAddZero);
         endta.setPreferredSize(new Dimension(200,30));
         endta.setFont(new Font("나눔바른고딕",Font.BOLD,20));
         diaryTA = new JPanel();
@@ -126,18 +127,34 @@ public class addData implements ActionListener {
     }
     private void errorMessage(){
         errorMessage = new JFrame();
-        errorMessage.setSize(400,150);
-        errorMessage.setLayout(new BorderLayout());
+        errorMessage.setTitle("문제가 발생하였습니다.");
+        errorMessage.setSize(400,120);
+        errorMessage.setLayout(new FlowLayout());
         errorMessage.setLocationRelativeTo(null);
         errorMessage.setResizable(false);
         errorMessage.setIconImage(icon.getImage());
         errorMessage.setVisible(true);
 
+        JPanel errorPanel = new JPanel();
+        errorPanel.setLayout(new GridLayout(2,1));
+        errorPanel.setSize(300,150);
         errorNotice = new JLabel("작성한 내용 중에 문제가 있습니다. 내용을 확인해주세요.");
         errorNotice.setFont(new Font("나눔바른고딕",Font.BOLD,14));
         errorNotice.setHorizontalAlignment(JLabel.CENTER);
 
-        errorMessage.add(errorNotice,BorderLayout.CENTER);
+        exit = new JButton("확인");
+        exit.setFont(new Font("나눔바른고딕",Font.BOLD,16));
+        exit.setPreferredSize(new Dimension(150,30));
+        exit.setBackground(new Color(5,62,143));
+        exit.setBorderPainted(false);
+        exit.setOpaque(true);
+        exit.setForeground(Color.WHITE);
+        exit.addActionListener(this);
+
+        errorPanel.add(errorNotice);
+        errorPanel.add(exit);
+
+        errorMessage.add(errorPanel);
     }
     public void getData(){
         nameData = nameta.getText();
@@ -157,6 +174,10 @@ public class addData implements ActionListener {
         getEndYear = getEndDate/10000;
         getEndMonth = (getEndDate-(getEndYear*10000))/100;
         getEndDateofMonth = getEndDate-(getEndYear*10000)-(getEndMonth*100);
+    }
+    public void checkZero(){
+        if(calDayOfMon<10)
+            setAddZero = "0"+Integer.toString(calDayOfMon);
     }
     public void checkSave(){
         checkSave = new JFrame();
@@ -201,6 +222,7 @@ public class addData implements ActionListener {
         okSign.setBorderPainted(false);
         okSign.setOpaque(true);
         okSign.setForeground(Color.WHITE);
+        okSign.addActionListener(this);
 
         showData.add(okSign);
 
@@ -215,6 +237,16 @@ public class addData implements ActionListener {
             addData.dispose();
         } else if (e.getSource() == okSign) {
             checkSave.dispose();
+            if(nameData.equals(""))
+                errorMessage();
+            else if((getStartDate/10000000)==0)
+                errorMessage();
+            else if((getEndDate/10000000)==0)
+                errorMessage();
+            else
+                addData.dispose();
+        } else if (e.getSource() == exit){
+            errorMessage.dispose();
         }
     }
 }

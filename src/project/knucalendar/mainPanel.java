@@ -9,7 +9,7 @@ import java.net.*;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-public class mainPanel extends calendarDataManager  implements ActionListener {
+public class mainPanel extends calendarDataManager implements ActionListener {
     final String title = "KNU Calendar Program";
     JFrame mainFrame;
     JPanel centrePanel, topPanel, bottomPanel, calendarPanel, showDiary, rightPanel, leftPanel, top_leftPanel, top_rightPanel, calendarTopPanel;
