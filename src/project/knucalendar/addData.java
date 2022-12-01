@@ -65,10 +65,10 @@ public class addData extends calendarDataManager implements ActionListener {
         kindbox = new JComboBox(arr);
         kindbox.setPreferredSize(new Dimension(500,30));
         kindbox.setFont(new Font("나눔바른고딕",Font.BOLD,17));
-        startta = new JTextArea(calYear+""+calMonth+""+setAddZero);
+        startta = new JTextArea(calYear+""+(calMonth+1)+""+setAddZero);
         startta.setPreferredSize(new Dimension(200,30));
         startta.setFont(new Font("나눔바른고딕",Font.BOLD,20));
-        endta = new JTextArea(calYear+""+calMonth+""+setAddZero);
+        endta = new JTextArea(calYear+""+(calMonth+1)+""+setAddZero);
         endta.setPreferredSize(new Dimension(200,30));
         endta.setFont(new Font("나눔바른고딕",Font.BOLD,20));
         diaryTA = new JPanel();
