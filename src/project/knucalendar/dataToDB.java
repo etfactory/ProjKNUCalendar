@@ -18,7 +18,6 @@ public class dataToDB {
 
         Connection conn;
         String url = "jdbc:sqlite:database.db";
-        Statement stmt;
         ResultSet result;
 
         getDday = getDday(getStartDate, getEndDate);
@@ -29,23 +28,15 @@ public class dataToDB {
         String getKind = kindData;
         String getWhere = whereData;
         String getString = stringData;
+        String getIcon;
 
         int getYear = getStartYear;
         int getMonth = getStartMonth;
         int getDayofMonth = getStartDayofMonth;
+
         try{
             Class.forName("org.sqlite.JDBC");
             conn = DriverManager.getConnection(url);
-            System.out.println("DB 연결 완료");
-
-            stmt=conn.createStatement();
-            result=stmt.executeQuery("select * from diarydata;");
-            System.out.println(result);
-
-            Class.forName("org.sqlite.JDBC");
-            conn = DriverManager.getConnection(url);
-
-            result=stmt.executeQuery("select * from diarydata;");
 
             String insertSQL = "insert into diarydata values(?,?,?,?,?,?,?,?)";
             PreparedStatement pstmt = conn.prepareStatement(insertSQL);
@@ -59,30 +50,36 @@ public class dataToDB {
             if (getKind.equals("학사일정")) {
                 pstmt.setString(5, "university");
                 pstmt.setString(8, "university.png");
+                getIcon = "university.png";
             } else if (getKind.equals("공휴일")) {
                 pstmt.setString(5, "legalholiday");
                 pstmt.setString(8, "user.png");
+                getIcon = "user.png";
             } else if (getKind.equals("시험")) {
                 pstmt.setString(5, "test");
                 pstmt.setString(8,"test.png");
+                getIcon = "test.png";
             } else if (getKind.equals("과제")) {
                 pstmt.setString(5, "homework");
                 pstmt.setString(8,"homework.png");
+                getIcon = "homework.png";
             } else if (getKind.equals("개인일정")) {
                 pstmt.setString(5, "user");
                 pstmt.setString(8,"user.png");
+                getIcon = "user.png";
             }
-            if (getString.equals(""))
-                pstmt.setString(6,null);
-            else
+            if (getString.equals("")) {
+                pstmt.setString(6, null);
+                getString = null;
+            } else
                 pstmt.setString(6,getString);
-            if (getWhere.equals(""))
-                pstmt.setString(7,null);
-            else
+            if (getWhere.equals("")) {
+                pstmt.setString(7, null);
+                getWhere = null;
+            } else
                 pstmt.setString(7,getWhere);
 
             result = pstmt.executeQuery();
-            stmt.executeQuery("insert into diarydata values (getYear,getMonth,getDayofMonth,getName,getKind,getString,getWhere,getIcon)");
             System.out.println(result);
         } catch(Exception e) {
             System.out.println();
