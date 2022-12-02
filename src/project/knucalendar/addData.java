@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 public class addData extends calendarDataManager implements ActionListener {
     JFrame addData, errorMessage, checkSave;
@@ -15,7 +16,7 @@ public class addData extends calendarDataManager implements ActionListener {
     JButton saveButton, cancelButton, okSign, exit;
     String nameData, kindData, startdateData, enddateData, whereData, stringData, setAddZero;
     int getStartYear,getStartMonth, getStartDateofMonth, getEndYear, getEndMonth, getEndDateofMonth, getStartDate, getEndDate;
-    String[] arr = {"학사일정","시험","과제","개인일정"};
+    String[] arr = {"학사일정","시험","과제","개인일정","공휴일"};
     ImageIcon icon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/icon/bear/bearVersion1_1.png")));
     public addData() {
         checkZero();
@@ -243,8 +244,19 @@ public class addData extends calendarDataManager implements ActionListener {
                 errorMessage();
             else if((getEndDate/10000000)==0)
                 errorMessage();
-            else
+            else {
                 addData.dispose();
+                try {
+                    new dataToDB(getStartDate, getEndDate, nameData,
+                        kindData, whereData, stringData,
+                        getStartYear, getStartMonth, getStartDateofMonth,
+                        getEndYear, getEndMonth, getEndDateofMonth);
+                } catch (ClassNotFoundException ex) {
+                    throw new RuntimeException(ex);
+                } catch (SQLException ex) {
+                    throw new RuntimeException(ex);
+                }
+            }
         } else if (e.getSource() == exit){
             errorMessage.dispose();
         }
