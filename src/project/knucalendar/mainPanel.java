@@ -19,6 +19,9 @@ public class mainPanel extends calendarDataManager implements ActionListener {
     JLabel showMonth, showYear, selectedDate;
     String WEEK_DAY_NAME[] = { "SUN", "MON", "TUE", "WED", "THR", "FRI", "SAT" };
     JButton dateButton[][] = new JButton[6][7];
+    JButton iconButton[] = new JButton[15];
+    JButton stringButton[] = new JButton[15];
+    JPanel iconPanel[] = new JPanel[15];
     JLabel dateButs[][] = new JLabel[6][7];
     listenForDateButs lForDateButs = new listenForDateButs();
     ListenForCalOpButtons lForCalOpButtons = new ListenForCalOpButtons();

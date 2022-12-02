@@ -7,7 +7,7 @@ import java.sql.*;
 public class connectDB {
     public connectDB(){
         Connection conn;
-        String url = "jdbc:sqlite:database:db";
+        String url = "jdbc:sqlite:database.db";
         Statement stmt;
         ResultSet result;
 
@@ -18,6 +18,7 @@ public class connectDB {
 
             stmt=conn.createStatement();
             result=stmt.executeQuery("select * from diarydata;");
+            System.out.println(result);
         } catch(Exception e) {
             System.out.println();
         }
