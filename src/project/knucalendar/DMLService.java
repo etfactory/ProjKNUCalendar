@@ -16,7 +16,7 @@ public class DMLService extends SQLiteManager {
     }
 
     // 데이터 삽입 함수
-    public int insertBlogArticle(Map<String, Object> dataMap) throws SQLException {
+    public int insertData(Map<String, Object> dataMap) throws SQLException {
         final String sql = "INSERT INTO diarydata ("+"\n"
                 + "    year,                       "+"\n"
                 + "    month,                      "+"\n"
@@ -24,8 +24,8 @@ public class DMLService extends SQLiteManager {
                 + "    name,                       "+"\n"
                 + "    kind,                       "+"\n"
                 + "    string,                     "+"\n"
-                + "    where                       "+"\n"
-                + "    icon                        "+"\n"
+                + "    where,                      "+"\n"
+                + "    icon,                       "+"\n"
                 + ") VALUES (                      "+"\n"
                 + "    ?,                          "+"\n"
                 + "    ?,                          "+"\n"

@@ -2,9 +2,6 @@ package project.knucalendar;
 
 import java.sql.SQLException;
 
-import project.knucalendar.DDLService;
-import project.knucalendar.DDLService.ResultType;
-
 import javax.swing.*;
 
 public class Main extends JFrame{

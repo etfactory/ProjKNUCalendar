@@ -10,7 +10,8 @@ import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
-import project.knucalendar.addData.*;
+import project.knucalendar.DDLService;
+import project.knucalendar.DDLService.ResultType;
 
 public class mainPanel extends calendarDataManager implements ActionListener {
     final String title = "KNU Calendar Program";
@@ -455,7 +456,7 @@ public class mainPanel extends calendarDataManager implements ActionListener {
     public void dropTable() throws SQLException {
 
         // 테이블 삭제
-        DDLService.ResultType result = DDL.dropTable("CW_BLOG_ATCL_LIST");
+        DDLService.ResultType result = DDL.dropTable("diarydata");
 
         // 테이블 삭제 결과 출력
         switch( result ) {
