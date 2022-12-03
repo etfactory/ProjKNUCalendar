@@ -1,10 +1,14 @@
 package project.knucalendar;
 
+import java.sql.SQLException;
+
+import project.knucalendar.DDLService;
+import project.knucalendar.DDLService.ResultType;
+
 import javax.swing.*;
 
 public class Main extends JFrame{
     mainPanel mainPanel;
-    connectDB connectDB;
 
     public static void main(String[] args){
         SwingUtilities.invokeLater(new Runnable() {
@@ -15,11 +19,6 @@ public class Main extends JFrame{
         });
     }
     public Main(){
-        SQLiteManager manager = new SQLiteManager();
-
-        manager.createConnection();     // 연결
-        manager.closeConnection();      // 연결 해제
-        manager.ensureConnection();     // 재연결
         new mainPanel();
     }
 }
