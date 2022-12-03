@@ -38,7 +38,7 @@ public class addDatatoDB {
         if (getString.equals("")) {
             getString = null;
         }
-        if (getWhere.equals("")) {
+        if (getWhere.equals("") || getWhere.equals(null)) {
             getWhere = null;
         }
 
