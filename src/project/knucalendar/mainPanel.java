@@ -9,6 +9,8 @@ import java.net.*;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
+import project.knucalendar.addData.*;
+
 public class mainPanel extends calendarDataManager implements ActionListener {
     final String title = "KNU Calendar Program";
     JFrame mainFrame;

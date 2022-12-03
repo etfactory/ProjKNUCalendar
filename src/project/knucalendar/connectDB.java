@@ -5,16 +5,16 @@ import java.awt.*;
 import java.sql.*;
 
 public class connectDB {
+    Connection conn;
+    Statement stmt;
+    ResultSet result;
     public connectDB(){
-        Connection conn;
         String url = "jdbc:sqlite:database.db";
-        Statement stmt;
-        ResultSet result;
 
         try{
             Class.forName("org.sqlite.JDBC");
             conn = DriverManager.getConnection(url);
-            System.out.println("DB 연결 완료");
+            System.out.println("DB 테스트 연결 완료");
 
             stmt=conn.createStatement();
             result=stmt.executeQuery("select * from diarydata;");

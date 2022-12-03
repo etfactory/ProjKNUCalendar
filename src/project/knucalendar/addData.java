@@ -247,18 +247,18 @@ public class addData extends calendarDataManager implements ActionListener {
             else {
                 addData.dispose();
                 try {
-                    new dataToDB(getStartDate, getEndDate, nameData,
-                        kindData, whereData, stringData,
-                        getStartYear, getStartMonth, getStartDateofMonth,
-                        getEndYear, getEndMonth, getEndDateofMonth);
-                } catch (ClassNotFoundException ex) {
-                    throw new RuntimeException(ex);
+                    new addDatatoDB(getStartDate, getEndDate, nameData,
+                                kindData, whereData, stringData,
+                                getStartYear, getStartMonth, getStartDateofMonth,
+                                getEndYear, getEndMonth, getEndDateofMonth);
                 } catch (SQLException ex) {
-                    throw new RuntimeException(ex);
                 }
             }
         } else if (e.getSource() == exit){
             errorMessage.dispose();
         }
+    }
+    public void getDataFromMainFrame(int getYear, int getMonth, int getDayofMonth){
+
     }
 }

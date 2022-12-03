@@ -15,6 +15,11 @@ public class Main extends JFrame{
         });
     }
     public Main(){
-        new mainPanel(); new connectDB();
+        SQLiteManager manager = new SQLiteManager();
+
+        manager.createConnection();     // 연결
+        manager.closeConnection();      // 연결 해제
+        manager.ensureConnection();     // 재연결
+        new mainPanel();
     }
 }
