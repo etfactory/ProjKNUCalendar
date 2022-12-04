@@ -24,8 +24,8 @@ public class DMLService extends SQLiteManager {
                 + "    name,                       "+"\n"
                 + "    kind,                       "+"\n"
                 + "    string,                     "+"\n"
-                + "    where,                      "+"\n"
-                + "    icon,                       "+"\n"
+                + "    address,                    "+"\n"
+                + "    icon                        "+"\n"
                 + ") VALUES (                      "+"\n"
                 + "    ?,                          "+"\n"
                 + "    ?,                          "+"\n"
@@ -34,8 +34,7 @@ public class DMLService extends SQLiteManager {
                 + "    ?,                          "+"\n"
                 + "    ?,                          "+"\n"
                 + "    ?,                          "+"\n"
-                + "    ?                           "+"\n"
-                + ")";
+                + "    ?                           "+")";
 
         // 변수설정
         //   - Database 변수
@@ -56,7 +55,7 @@ public class DMLService extends SQLiteManager {
             pstmt.setObject(4, dataMap.get("name"));
             pstmt.setObject(5, dataMap.get("kind"));
             pstmt.setObject(6, dataMap.get("string"));
-            pstmt.setObject(7, dataMap.get("where"));
+            pstmt.setObject(7, dataMap.get("address"));
             pstmt.setObject(8, dataMap.get("icon"));
 
             // 쿼리 실행

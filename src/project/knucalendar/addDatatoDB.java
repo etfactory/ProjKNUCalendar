@@ -55,7 +55,7 @@ public class addDatatoDB {
         dataMap.put("name", getName);
         dataMap.put("kind", getKind);
         dataMap.put("string", getString);
-        dataMap.put("where", getWhere);
+        dataMap.put("address", getWhere);
         dataMap.put("icon", getIcon);
 
         // 데이터 입력

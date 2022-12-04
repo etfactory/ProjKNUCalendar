@@ -6,6 +6,8 @@ import java.awt.event.*;
 import java.net.URI;
 
 public class subMenu implements ActionListener {
+
+    resetProgram rs = new resetProgram();
     JFrame subMenu;
     JPanel centrePanel_sub,top_gap;
     JButton darkOnOff, univNotice, univLunch, resetProgram, progInfo;
@@ -95,7 +97,8 @@ public class subMenu implements ActionListener {
             }
         } else if (e.getSource() == resetProgram) {
             try {
-                new resetProgram();
+                rs.dropTable();
+                rs.createTable();
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
