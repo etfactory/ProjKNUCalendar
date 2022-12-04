@@ -15,12 +15,17 @@ import project.knucalendar.DDLService.ResultType;
 public class mainPanel extends calendarDataManager implements ActionListener {
     final String title = "KNU Calendar Program";
     JFrame mainFrame;
-    JPanel centrePanel, topPanel, bottomPanel, calendarPanel, showDiary, rightPanel, leftPanel, top_leftPanel, top_rightPanel, calendarTopPanel;
-    JButton linkedKNU, linkedLMS, linkedSugang, menuButton, todayButton, lYearBut, rYearBut, lMonthBut, rMonthBut, openAddData;
+    JPanel centrePanel, topPanel, bottomPanel,
+            calendarPanel, showDiary,
+            rightPanel, leftPanel,
+            top_leftPanel, top_rightPanel, calendarTopPanel;
+    JButton linkedKNU, linkedLMS, linkedSugang, menuButton, todayButton,
+            lYearBut, rYearBut, lMonthBut, rMonthBut, openAddData;
     JScrollPane diaryPanel;
     JButton weekDaysName[] = new JButton[7];
     JLabel showMonth, showYear, selectedDate;
     String WEEK_DAY_NAME[] = { "SUN", "MON", "TUE", "WED", "THR", "FRI", "SAT" };
+    int getYearinListener, getMonthinListener, getDayofMonthinListener;
     JButton dateButton[][] = new JButton[6][7];
     JButton iconButton[] = new JButton[15];
     JButton stringButton[] = new JButton[15];
@@ -412,8 +417,14 @@ public class mainPanel extends calendarDataManager implements ActionListener {
 
                 selectedDate.setText(calYear + "년 " + (calMonth + 1) + "월 " + newCalDayOfMon + "일 (" + dDayString + ")");
                 calDayOfMon = newCalDayOfMon;
+
+                getDateinListener(calYear, calMonth, newCalDayOfMon);
             }
         }
     }
-
+    private void getDateinListener(int y, int m, int d){
+        getYearinListener = y;
+        getMonthinListener = m;
+        getDayofMonthinListener = d;
+    }
 }

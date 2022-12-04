@@ -15,9 +15,13 @@ public class addData extends calendarDataManager implements ActionListener {
     JLabel errorNotice;
     JButton saveButton, cancelButton, okSign, exit;
     String nameData, kindData, startdateData, enddateData, whereData, stringData, setAddZero;
-    int getStartYear,getStartMonth, getStartDateofMonth, getEndYear, getEndMonth, getEndDateofMonth, getStartDate, getEndDate;
+    int getStartYear,getStartMonth, getStartDateofMonth,
+            getEndYear, getEndMonth, getEndDateofMonth,
+            getStartDate, getEndDate;
     String[] arr = {"학사일정","시험","과제","개인일정","공휴일"};
-    ImageIcon icon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/icon/bear/bearVersion1_1.png")));
+    ImageIcon icon =
+            new ImageIcon(Toolkit.getDefaultToolkit().
+                    getImage(getClass().getResource("img/icon/bear/bearVersion1_1.png")));
     public addData() {
         checkZero();
         addData = new JFrame();
