@@ -6,11 +6,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.*;
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-
-import project.knucalendar.DDLService;
-import project.knucalendar.DDLService.ResultType;
+import java.util.*;
+import java.util.List;
 
 public class mainPanel extends calendarDataManager implements ActionListener {
     final String title = "KNU Calendar Program";
@@ -30,6 +27,10 @@ public class mainPanel extends calendarDataManager implements ActionListener {
     JButton iconButton[] = new JButton[15];
     JButton stringButton[] = new JButton[15];
     JPanel iconPanel[] = new JPanel[15];
+
+    private DQLService DQL = new DQLService("jdbc:sqlite:database.db");
+
+    int countButtons;
     JLabel dateButs[][] = new JLabel[6][7];
     listenForDateButs lForDateButs = new listenForDateButs();
     ListenForCalOpButtons lForCalOpButtons = new ListenForCalOpButtons();
@@ -222,7 +223,9 @@ public class mainPanel extends calendarDataManager implements ActionListener {
                 dateButton[i][j].setOpaque(true);
             }
         }
+        getDateinListener(calYear, calMonth+1, calDayOfMon);
         showCal();
+        selectDate();
         calendarPanel.setBorder(new LineBorder(Color.WHITE, 2, true));
 
         rightPanel = new JPanel();
@@ -418,11 +421,108 @@ public class mainPanel extends calendarDataManager implements ActionListener {
                 selectedDate.setText(calYear + "년 " + (calMonth + 1) + "월 " + newCalDayOfMon + "일 (" + dDayString + ")");
                 calDayOfMon = newCalDayOfMon;
 
-                getDateinListener(calYear, calMonth, newCalDayOfMon);
+                getDateinListener(calYear, calMonth+1, newCalDayOfMon);
+
+                selectDate();
+                findKindList();
             }
         }
     }
-    private void getDateinListener(int y, int m, int d){
+    public void selectDate(){
+        final Map<String, Object> dataMap = new HashMap<String, Object>();
+        dataMap.put("year" , getYearinListener);
+        dataMap.put("month", getMonthinListener);
+        dataMap.put("date" , getDayofMonthinListener);
+
+        List<Map<String, Object>> result = DQL.selectList(dataMap);
+
+        countButtons = DQL.toInt(result);
+
+        System.out.println(getYearinListener+" "+getMonthinListener+" "+getDayofMonthinListener+" "+countButtons);
+        DQL.printMapList(result);
+    }
+    public void findKindList(){
+        final Map<String, Object> dataMap = new HashMap<String, Object>();
+        dataMap.put("year" , getYearinListener);
+        dataMap.put("month", getMonthinListener);
+        dataMap.put("date" , getDayofMonthinListener);
+        dataMap.put("kind" , "공휴일");
+
+        List<Map<String, Object>> resultHoliday = DQL.findKind(dataMap);
+
+        int countHoliday = DQL.toInt(resultHoliday);
+
+        if (countHoliday>0){
+            for(int i=0;i<countHoliday;i++){
+            }
+        }
+
+        dataMap.put("year" , getYearinListener);
+        dataMap.put("month", getMonthinListener);
+        dataMap.put("date" , getDayofMonthinListener);
+        dataMap.put("kind" , "학사일정");
+
+        List<Map<String, Object>> resultUniv = DQL.findKind(dataMap);
+
+        int countUniv = DQL.toInt(resultUniv);
+
+        if (countUniv>0){
+            for(int i=0;i<countUniv;i++){
+            }
+        }
+
+        dataMap.put("year" , getYearinListener);
+        dataMap.put("month", getMonthinListener);
+        dataMap.put("date" , getDayofMonthinListener);
+        dataMap.put("kind" , "시험");
+
+        List<Map<String, Object>> resultTest = DQL.findKind(dataMap);
+
+        int countTest = DQL.toInt(resultTest);
+
+        if (countTest>0){
+            for(int i=0;i<countTest;i++){
+            }
+        }
+
+        dataMap.put("year" , getYearinListener);
+        dataMap.put("month", getMonthinListener);
+        dataMap.put("date" , getDayofMonthinListener);
+        dataMap.put("kind" , "과제");
+
+        List<Map<String, Object>> resultHomework = DQL.findKind(dataMap);
+
+        int countHomework = DQL.toInt(resultHomework);
+
+        if (countHomework>0){
+            for(int i=0;i<countHomework;i++){
+            }
+        }
+
+        dataMap.put("year" , getYearinListener);
+        dataMap.put("month", getMonthinListener);
+        dataMap.put("date" , getDayofMonthinListener);
+        dataMap.put("kind" , "개인일정");
+
+        List<Map<String, Object>> resultUser = DQL.findKind(dataMap);
+
+        int countUser = DQL.toInt(resultUser);
+
+        if (countUser>0){
+            for(int i=0;i<countUser;i++){
+            }
+        }
+
+        System.out.println(DQL.getName());
+
+        System.out.println(getYearinListener+" "+getMonthinListener+" "+getDayofMonthinListener+" "+countButtons);
+        DQL.printMapList(resultHoliday);
+        DQL.printMapList(resultUniv);
+        DQL.printMapList(resultTest);
+        DQL.printMapList(resultHomework);
+        DQL.printMapList(resultUser);
+    }
+    public void getDateinListener(int y, int m, int d){
         getYearinListener = y;
         getMonthinListener = m;
         getDayofMonthinListener = d;
