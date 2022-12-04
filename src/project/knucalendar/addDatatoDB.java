@@ -1,12 +1,15 @@
 package project.knucalendar;
 
 import java.sql.*;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.Map;
 
 public class addDatatoDB {
     String getName, getKind, getWhere, getString, getIcon;
     int getYear, getMonth, getDayofMonth;
+    int getStartDate, getEndDate;
+    int setLastDate = 0;
     private DMLService DML = new DMLService("jdbc:sqlite:database.db");
     public addDatatoDB(int getStartDate, int getEndDate, String nameData,
                                   String kindData, String whereData, String stringData,
@@ -42,7 +45,21 @@ public class addDatatoDB {
             getWhere = null;
         }
 
-        insert();
+        countLastDay();
+
+        for(int i = 0; i<getDday(getStartYear,getStartMonth,getStartDayofMonth,getEndYear,getEndMonth,getEndDayofMonth);i++){
+            insert();
+            getDayofMonth++;
+            if (getDayofMonth > setLastDate){
+                getMonth++;
+                if (getMonth > 12){
+                    getYear++;
+                    getMonth = 1;
+                }
+                countLastDay();
+                getDayofMonth=1;
+            }
+        }
     }
     public void insert() throws SQLException {
         // 상수 설정
@@ -65,5 +82,28 @@ public class addDatatoDB {
         } else {
             System.out.println("데이터 입력 실패");
         }
+    }
+
+    public void countLastDay(){
+        if (getMonth == 1 || getMonth ==  3 || getMonth ==  5 || getMonth ==  7 || getMonth ==  9 || getMonth ==  11){
+            setLastDate = 31;
+        } else if (getMonth == 4 || getMonth == 6 || getMonth == 8 || getMonth == 10 || getMonth == 12){
+            setLastDate = 30;
+        } else if (getMonth == 2) {
+            if(getYear%4 == 0 && getYear%100 != 0 || getYear%400 == 0)
+                setLastDate = 29;
+            else
+                setLastDate = 28;
+        }
+    }
+
+    public int getDday(int sty, int stm, int std, int ey, int em, int ed){
+        GregorianCalendar first = new GregorianCalendar(sty, stm, std);
+        GregorianCalendar second = new GregorianCalendar(ey, em, ed);
+
+        String dDayString = new String();
+
+        int dDay=((int)((second.getTimeInMillis() - first.getTimeInMillis())/1000/60/60/24));
+        return dDay;
     }
 }
