@@ -28,9 +28,12 @@ public class mainPanel extends calendarDataManager implements ActionListener {
     JButton stringButton[] = new JButton[15];
     JPanel iconPanel[] = new JPanel[15];
 
+    int count;
+
     private DQLService DQL = new DQLService("jdbc:sqlite:database.db");
 
     int countButtons;
+    int showDiaryheight;
     JLabel dateButs[][] = new JLabel[6][7];
     listenForDateButs lForDateButs = new listenForDateButs();
     ListenForCalOpButtons lForCalOpButtons = new ListenForCalOpButtons();
@@ -120,10 +123,30 @@ public class mainPanel extends calendarDataManager implements ActionListener {
         leftPanel.add(openAddData,BorderLayout.EAST);
         leftPanel.add(selectedDate,BorderLayout.CENTER);
 
+        showDiaryheight = 1000;
         showDiary = new JPanel();
+        showDiary.setPreferredSize(new Dimension(400,showDiaryheight));
         diaryPanel = new JScrollPane(showDiary);
         diaryPanel.setPreferredSize(new Dimension(400,420));
+        for(int i=0;i<15;i++){
+            iconButton[i] = new JButton();
+            iconButton[i].setPreferredSize(new Dimension(70,70));
+            iconButton[i].setBackground(new Color(214,233,255));
+            iconButton[i].setVisible(false);
 
+            stringButton[i] = new JButton();
+            stringButton[i].setPreferredSize(new Dimension(330,70));
+            stringButton[i].setBackground(new Color(214,233,255));
+            stringButton[i].setVisible(false);
+
+            iconPanel[i] = new JPanel();
+            iconPanel[i].setLayout(new FlowLayout(FlowLayout.CENTER,0,0));
+
+            iconPanel[i].add(iconButton[i]);
+            iconPanel[i].add(stringButton[i]);
+
+            showDiary.add(iconPanel[i]);
+        }
         leftPanel.add(diaryPanel,BorderLayout.PAGE_END);
 
         calendarTopPanel = new JPanel();
@@ -388,6 +411,10 @@ public class mainPanel extends calendarDataManager implements ActionListener {
     }
     private class listenForDateButs implements ActionListener{
         public void actionPerformed(ActionEvent e) {
+            for(int i=0;i<15;i++){
+                iconButton[i].setVisible(false);
+                stringButton[i].setVisible(false);
+            }
             int k=0, l=0, newCalDayOfMon=0;
             for(int i=0;i<6;i++){
                 for(int j=0;j<7;j++){
@@ -421,7 +448,6 @@ public class mainPanel extends calendarDataManager implements ActionListener {
                 getDateinListener(calYear, calMonth+1, newCalDayOfMon);
 
                 selectDate();
-                findKindList();
             }
         }
     }
@@ -434,6 +460,11 @@ public class mainPanel extends calendarDataManager implements ActionListener {
         List<Map<String, Object>> result = DQL.selectList(dataMap);
 
         countButtons = DQL.toInt(result);
+
+        for(int i=0;i<countButtons;i++){
+            iconButton[i].setVisible(true);
+            stringButton[i].setVisible(true);
+        }
 
         System.out.println(getYearinListener+" "+getMonthinListener+" "+getDayofMonthinListener+" "+countButtons);
         DQL.printMapList(result);
@@ -449,26 +480,10 @@ public class mainPanel extends calendarDataManager implements ActionListener {
 
         int countHoliday = DQL.toInt(resultHoliday);
 
-        int i=0;
         int count=0;
 
         if (countHoliday>0){
-            for(i=count;i<countHoliday;i++){
-                iconButton[i] = new JButton();
-                iconButton[i].setPreferredSize(new Dimension(70,70));
-                iconButton[i].setBackground(new Color(214,233,255));
-
-                stringButton[i] = new JButton();
-                stringButton[i].setPreferredSize(new Dimension(330,70));
-                stringButton[i].setBackground(new Color(214,233,255));
-
-                iconPanel[i] = new JPanel();
-                iconPanel[i].setLayout(new FlowLayout(FlowLayout.CENTER,0,0));
-
-                iconPanel[i].add(iconButton[i]);
-                iconPanel[i].add(stringButton[i]);
-
-                showDiary.add(iconPanel[i]);
+            for(int i=count;i<countHoliday;i++){
                 count++;
             }
         }
@@ -483,9 +498,7 @@ public class mainPanel extends calendarDataManager implements ActionListener {
         int countUniv = DQL.toInt(resultUniv);
 
         if (countUniv>0){
-            for(i=0;i<countUniv;i++){
-                iconButton[i] = new JButton();
-                diaryPanel.add(iconButton[i]);
+            for(int i=count;i<countUniv;i++){
                 count++;
             }
         }
@@ -500,9 +513,7 @@ public class mainPanel extends calendarDataManager implements ActionListener {
         int countTest = DQL.toInt(resultTest);
 
         if (countTest>0){
-            for(i=0;i<countTest;i++){
-                iconButton[i] = new JButton();
-                diaryPanel.add(iconButton[i]);
+            for(int i=count;i<countTest;i++){
                 count++;
             }
         }
@@ -517,9 +528,7 @@ public class mainPanel extends calendarDataManager implements ActionListener {
         int countHomework = DQL.toInt(resultHomework);
 
         if (countHomework>0){
-            for(i=0;i<countHomework;i++){
-                iconButton[i] = new JButton();
-                diaryPanel.add(iconButton[i]);
+            for(int i=count;i<countHomework;i++){
                 count++;
             }
         }
@@ -534,9 +543,7 @@ public class mainPanel extends calendarDataManager implements ActionListener {
         int countUser = DQL.toInt(resultUser);
 
         if (countUser>0){
-            for(i=0;i<countUser;i++){
-                iconButton[i] = new JButton();
-                diaryPanel.add(iconButton[i]);
+            for(int i=count;i<countUser;i++){
                 count++;
             }
         }
@@ -548,6 +555,12 @@ public class mainPanel extends calendarDataManager implements ActionListener {
         DQL.printMapList(resultTest);
         DQL.printMapList(resultHomework);
         DQL.printMapList(resultUser);
+
+        setCount(count);
+    }
+
+    public void setCount(int c){
+        count = c;
     }
     public void getDateinListener(int y, int m, int d){
         getYearinListener = y;
