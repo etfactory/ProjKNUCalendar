@@ -9,7 +9,23 @@ import java.util.Map;
 import java.util.Set;
 
 public class DQLService extends SQLiteManager {
-    ArrayList<String> getNames = new ArrayList<>();
+    String getHolidayNames[] = new String[15];
+    String getUnivNames[] = new String[15];
+    String getTestNames[] = new String[15];
+    String getHomeworkNames[] = new String[15];
+    String getUserNames[] = new String[15];
+
+    ArrayList<String> returnHoliday;
+    ArrayList<String> returnUniv;
+    ArrayList<String> returnHomework;
+    ArrayList<String> returnTest;
+    ArrayList<String> returnUser;
+
+    int holidaycount = 0;
+    int univcount = 0;
+    int testcount = 0;
+    int homeworkcount = 0;
+    int usercount = 0;
     // 생성자
     public DQLService() {
 
@@ -160,10 +176,28 @@ public class DQLService extends SQLiteManager {
                 for(String column : columnNames) {
                     resultMap.put(column, rs.getObject(column));
                 }
-
                 if( resultMap != null ) {
                     selected.add(resultMap);
-                    setName(rs.getString(5));
+                    if(rs.getString(4).equals("학사일정")) {
+                        getUserNames[univcount] = rs.getString("name");
+                        univcount++;
+                    }
+                    else if (rs.getString(4).equals("공휴일")) {
+                        getHolidayNames[holidaycount] = rs.getString("name");
+                        holidaycount++;
+                    }
+                    else if (rs.getString(4).equals("시험")) {
+                        getTestNames[testcount] = rs.getString("name");
+                        testcount++;
+                    }
+                    else if (rs.getString(4).equals("과제")) {
+                        getHomeworkNames[homeworkcount] = rs.getString("name");
+                        homeworkcount++;
+                    }
+                    else if (rs.getString(4).equals("개인일정")) {
+                        getUserNames[usercount] = rs.getString("name");
+                        usercount++;
+                    }
                 }
             }
 
@@ -191,12 +225,20 @@ public class DQLService extends SQLiteManager {
         return selected;
     }
 
-    public void setName(String getName){
-        getNames.add(getName);
+    public String[] getHolidayName(){
+        return getHolidayNames;
     }
-
-    public ArrayList<String> getName(){
-        return getNames;
+    public String[] getUnivName(){
+        return getUnivNames;
+    }
+    public String[] getTestName(){
+        return getTestNames;
+    }
+    public String[] getHomeworkName(){
+        return getHomeworkNames;
+    }
+    public String[] getUserNames(){
+        return getUserNames;
     }
 
     // 조회 결과 출력 함수
@@ -227,6 +269,19 @@ public class DQLService extends SQLiteManager {
 
             System.out.println(sb.toString());
         }
+    }
+
+    public void clear(){
+        if (returnHoliday != null)
+            returnHoliday.clear();
+        if (returnUniv != null)
+            returnUniv.clear();
+        if (returnTest != null)
+            returnTest.clear();
+        if (returnHomework != null)
+            returnHomework.clear();
+        if (returnUser != null)
+            returnUser.clear();
     }
 
     public int toInt(List<Map<String, Object>> mapList){
