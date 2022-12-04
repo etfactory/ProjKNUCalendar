@@ -256,14 +256,13 @@ public class DQLService extends SQLiteManager {
 
             StringBuilder sb = new StringBuilder();
 
-            sb.append(i);
-            sb.append(": {");
+            sb.append("{");
             map.entrySet().forEach(( entry )->{
                 sb.append('"')
                         .append(entry.getKey())
                         .append("\": \"")
                         .append(entry.getValue())
-                        .append("\", ");
+                        .append("\" , ");
             });
             sb.append("}");
 
