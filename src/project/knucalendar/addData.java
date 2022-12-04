@@ -242,19 +242,19 @@ public class addData extends calendarDataManager implements ActionListener {
             addData.dispose();
         } else if (e.getSource() == okSign) {
             checkSave.dispose();
-            if(nameData.equals(""))
+            if (nameData.equals(""))
                 errorMessage();
-            else if((getStartDate/10000000)==0)
+            else if ((getStartDate / 10000000) == 0)
                 errorMessage();
-            else if((getEndDate/10000000)==0)
+            else if ((getEndDate / 10000000) == 0)
                 errorMessage();
             else {
                 addData.dispose();
                 try {
                     new addDatatoDB(getStartDate, getEndDate, nameData,
-                                kindData, whereData, stringData,
-                                getStartYear, getStartMonth, getStartDateofMonth,
-                                getEndYear, getEndMonth, getEndDateofMonth);
+                            kindData, whereData, stringData,
+                            getStartYear, getStartMonth, getStartDateofMonth,
+                            getEndYear, getEndMonth, getEndDateofMonth);
                 } catch (SQLException ex) {
                 }
             }
@@ -262,7 +262,7 @@ public class addData extends calendarDataManager implements ActionListener {
             errorMessage.dispose();
         }
     }
-    public void getDataFromMainFrame(int getYear, int getMonth, int getDayofMonth){
+    public void getokSign(){
 
     }
 }

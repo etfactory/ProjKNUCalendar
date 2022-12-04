@@ -47,7 +47,7 @@ public class addDatatoDB {
 
         countLastDay();
 
-        for(int i = 0; i<getDday(getStartYear,getStartMonth,getStartDayofMonth,getEndYear,getEndMonth,getEndDayofMonth);i++){
+        for(int i = 0; i<=getDday(getStartYear,getStartMonth,getStartDayofMonth,getEndYear,getEndMonth,getEndDayofMonth);i++){
             insert();
             getDayofMonth++;
             if (getDayofMonth > setLastDate){
