@@ -21,6 +21,7 @@ public class mainPanel extends calendarDataManager implements ActionListener {
     JScrollPane diaryPanel;
     JButton weekDaysName[] = new JButton[7];
     JLabel showMonth, showYear, selectedDate;
+    JLabel setTitle[] = new JLabel[15];
     String WEEK_DAY_NAME[] = { "SUN", "MON", "TUE", "WED", "THR", "FRI", "SAT" };
     int getYearinListener, getMonthinListener, getDayofMonthinListener;
     JButton dateButton[][] = new JButton[6][7];
@@ -134,7 +135,11 @@ public class mainPanel extends calendarDataManager implements ActionListener {
             iconButton[i].setBackground(new Color(214,233,255));
             iconButton[i].setVisible(false);
 
+            setTitle[i] = new JLabel();
+            setTitle[i].setFont(new Font("나눔바른고딕",Font.BOLD,20));
+
             stringButton[i] = new JButton();
+            stringButton[i].add(setTitle[i]);
             stringButton[i].setPreferredSize(new Dimension(330,70));
             stringButton[i].setBackground(new Color(214,233,255));
             stringButton[i].setVisible(false);
@@ -411,6 +416,7 @@ public class mainPanel extends calendarDataManager implements ActionListener {
     }
     private class listenForDateButs implements ActionListener{
         public void actionPerformed(ActionEvent e) {
+            DQL.clear();
             for(int i=0;i<15;i++){
                 iconButton[i].setVisible(false);
                 stringButton[i].setVisible(false);
@@ -448,6 +454,7 @@ public class mainPanel extends calendarDataManager implements ActionListener {
                 getDateinListener(calYear, calMonth+1, newCalDayOfMon);
 
                 selectDate();
+                findKindList();
             }
         }
     }
@@ -484,6 +491,8 @@ public class mainPanel extends calendarDataManager implements ActionListener {
 
         if (countHoliday>0){
             for(int i=count;i<countHoliday;i++){
+                for(int j=0;j<countHoliday;j++)
+                    setTitle[count].setText(DQL.getHolidayNames[j]);
                 count++;
             }
         }
@@ -499,6 +508,8 @@ public class mainPanel extends calendarDataManager implements ActionListener {
 
         if (countUniv>0){
             for(int i=count;i<countUniv;i++){
+                for(int j=0;j<countUniv;j++)
+                    setTitle[count].setText(DQL.getUnivNames[j]);
                 count++;
             }
         }
@@ -514,6 +525,8 @@ public class mainPanel extends calendarDataManager implements ActionListener {
 
         if (countTest>0){
             for(int i=count;i<countTest;i++){
+                for(int j=0;j<countTest;j++)
+                    setTitle[count].setText(DQL.getTestNames[j]);
                 count++;
             }
         }
@@ -529,6 +542,8 @@ public class mainPanel extends calendarDataManager implements ActionListener {
 
         if (countHomework>0){
             for(int i=count;i<countHomework;i++){
+                for(int j=0;j<countHomework;j++)
+                    setTitle[count].setText(DQL.getHomeworkNames[j]);
                 count++;
             }
         }
@@ -544,12 +559,14 @@ public class mainPanel extends calendarDataManager implements ActionListener {
 
         if (countUser>0){
             for(int i=count;i<countUser;i++){
+                for(int j=0;j<countUser;j++)
+                    setTitle[count].setText(DQL.getUserNames[j]);
                 count++;
             }
         }
 
         System.out.println(getYearinListener+" "+getMonthinListener+" "+getDayofMonthinListener);
-        System.out.println(DQL.getHolidayName()+" "+DQL.getUnivName()+" "+DQL.getTestName()+" "+DQL.getHomeworkName()+" "+DQL.getUserNames());
+        System.out.println(Arrays.toString(DQL.getHolidayName()) +" "+ Arrays.toString(DQL.getUnivName()) +" "+ Arrays.toString(DQL.getTestName()) +" "+ Arrays.toString(DQL.getHomeworkName()) +" "+ Arrays.toString(DQL.getUserNames()));
         DQL.printMapList(resultHoliday);
         DQL.printMapList(resultUniv);
         DQL.printMapList(resultTest);

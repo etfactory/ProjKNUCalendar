@@ -179,23 +179,23 @@ public class DQLService extends SQLiteManager {
                 if( resultMap != null ) {
                     selected.add(resultMap);
                     if(rs.getString(4).equals("학사일정")) {
-                        getUserNames[univcount] = rs.getString("name");
+                        getUserNames[univcount] = rs.getString(5);
                         univcount++;
                     }
                     else if (rs.getString(4).equals("공휴일")) {
-                        getHolidayNames[holidaycount] = rs.getString("name");
+                        getHolidayNames[holidaycount] = rs.getString(5);
                         holidaycount++;
                     }
                     else if (rs.getString(4).equals("시험")) {
-                        getTestNames[testcount] = rs.getString("name");
+                        getTestNames[testcount] = rs.getString(5);
                         testcount++;
                     }
                     else if (rs.getString(4).equals("과제")) {
-                        getHomeworkNames[homeworkcount] = rs.getString("name");
+                        getHomeworkNames[homeworkcount] = rs.getString(5);
                         homeworkcount++;
                     }
                     else if (rs.getString(4).equals("개인일정")) {
-                        getUserNames[usercount] = rs.getString("name");
+                        getUserNames[usercount] = rs.getString(5);
                         usercount++;
                     }
                 }
@@ -219,7 +219,6 @@ public class DQLService extends SQLiteManager {
                 e.printStackTrace();
             }
         }
-
         // 결과 반환
         //   - 조회된 데이터 리스트
         return selected;
@@ -271,16 +270,18 @@ public class DQLService extends SQLiteManager {
     }
 
     public void clear(){
-        if (returnHoliday != null)
-            returnHoliday.clear();
-        if (returnUniv != null)
-            returnUniv.clear();
-        if (returnTest != null)
-            returnTest.clear();
-        if (returnHomework != null)
-            returnHomework.clear();
-        if (returnUser != null)
-            returnUser.clear();
+        holidaycount=0;
+        univcount=0;
+        testcount=0;
+        homeworkcount=0;
+        usercount=0;
+        for(int i=0;i<15;i++){
+            getHolidayNames[i]  =null;
+            getUnivNames[i]     =null;
+            getTestNames[i]     =null;
+            getHomeworkNames[i] =null;
+            getUserNames[i]     =null;
+        }
     }
 
     public int toInt(List<Map<String, Object>> mapList){
