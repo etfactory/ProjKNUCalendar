@@ -152,6 +152,7 @@ public class mainPanel extends calendarDataManager implements ActionListener {
 
             showDiary.add(iconPanel[i]);
         }
+        findKindList();
         leftPanel.add(diaryPanel,BorderLayout.PAGE_END);
 
         calendarTopPanel = new JPanel();
@@ -416,7 +417,6 @@ public class mainPanel extends calendarDataManager implements ActionListener {
     }
     private class listenForDateButs implements ActionListener{
         public void actionPerformed(ActionEvent e) {
-            DQL.clear();
             for(int i=0;i<15;i++){
                 iconButton[i].setVisible(false);
                 stringButton[i].setVisible(false);
@@ -490,10 +490,13 @@ public class mainPanel extends calendarDataManager implements ActionListener {
         int count=0;
 
         if (countHoliday>0){
-            for(int i=count;i<countHoliday;i++){
-                for(int j=0;j<countHoliday;j++)
-                    setTitle[count].setText(DQL.getHolidayNames[j]);
-                count++;
+            for(int i=count;i<(count+countHoliday);i++){
+                for(int j=0;j<countHoliday;j++) {
+                    if (DQL.getHolidayNames[j] != null) {
+                        setTitle[count].setText(DQL.getHolidayNames[j]);
+                        count++;
+                    }
+                }
             }
         }
 
@@ -508,9 +511,12 @@ public class mainPanel extends calendarDataManager implements ActionListener {
 
         if (countUniv>0){
             for(int i=count;i<countUniv;i++){
-                for(int j=0;j<countUniv;j++)
-                    setTitle[count].setText(DQL.getUnivNames[j]);
-                count++;
+                for(int j=0;j<countUniv;j++) {
+                    if (DQL.getUnivNames[j] != null) {
+                        setTitle[count].setText(DQL.getUnivNames[j]);
+                        count++;
+                    }
+                }
             }
         }
 
@@ -524,10 +530,13 @@ public class mainPanel extends calendarDataManager implements ActionListener {
         int countTest = DQL.toInt(resultTest);
 
         if (countTest>0){
-            for(int i=count;i<countTest;i++){
-                for(int j=0;j<countTest;j++)
-                    setTitle[count].setText(DQL.getTestNames[j]);
-                count++;
+            for(int i=count;i<(count+countTest);i++){
+                for(int j=0;j<countTest;j++) {
+                    if (DQL.getTestNames[j] != null) {
+                        setTitle[count].setText(DQL.getTestNames[j]);
+                        count++;
+                    }
+                }
             }
         }
 
@@ -541,10 +550,13 @@ public class mainPanel extends calendarDataManager implements ActionListener {
         int countHomework = DQL.toInt(resultHomework);
 
         if (countHomework>0){
-            for(int i=count;i<countHomework;i++){
-                for(int j=0;j<countHomework;j++)
-                    setTitle[count].setText(DQL.getHomeworkNames[j]);
-                count++;
+            for(int i=count;i<(countHomework+count);i++){
+                for(int j=0;j<countHomework;j++) {
+                    if (DQL.getHomeworkNames[j] != null) {
+                        setTitle[count].setText(DQL.getHomeworkNames[j]);
+                        count++;
+                    }
+                }
             }
         }
 
@@ -558,10 +570,13 @@ public class mainPanel extends calendarDataManager implements ActionListener {
         int countUser = DQL.toInt(resultUser);
 
         if (countUser>0){
-            for(int i=count;i<countUser;i++){
-                for(int j=0;j<countUser;j++)
-                    setTitle[count].setText(DQL.getUserNames[j]);
-                count++;
+            for(int i=count;i<(countUser+count);i++){
+                for(int j=0;j<countUser;j++) {
+                    if (DQL.getUserNames[j] != null) {
+                        setTitle[count].setText(DQL.getUserNames[j]);
+                        count++;
+                    }
+                }
             }
         }
 
