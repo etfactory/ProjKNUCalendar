@@ -527,6 +527,7 @@ public class mainPanel extends calendarDataManager implements ActionListener {
         int countUser = DQL.toInt(resultUser);
 
         ArrayList<String> saveString = new ArrayList<>();
+        ArrayList<String> saveFile = new ArrayList<>();
 
         for(int i=0;i<countHoliday;i++){
             saveString.add(DQL.getHolidayNames[i]);
