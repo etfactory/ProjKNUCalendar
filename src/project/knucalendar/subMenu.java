@@ -4,10 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.net.URI;
+import java.sql.SQLException;
 
 public class subMenu implements ActionListener {
 
     resetProgram rs = new resetProgram();
+    backupData bd = new backupData();
     JFrame subMenu, checkReset;
     JPanel centrePanel_sub,top_gap;
     JButton dataManage, univNotice, univLunch, resetProgram, progInfo, okReset;
@@ -113,9 +115,11 @@ public class subMenu implements ActionListener {
             try {
                 rs.dropTable();
                 rs.createTable();
+                bd.insert();
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
+            checkReset.dispose();
         }
     }
 

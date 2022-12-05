@@ -1,8 +1,10 @@
 package project.knucalendar;
 
+import java.io.*;
 import java.sql.*;
+import java.util.ArrayList;
 
-public class resetProgram {
+public class resetProgram extends SQLiteManager {
     // 변수 생성
     private DDLService DDL = new DDLService("jdbc:sqlite:database.db");
 

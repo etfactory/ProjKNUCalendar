@@ -31,7 +31,7 @@ public class mainPanel extends calendarDataManager implements ActionListener {
 
     int count;
 
-    int selectedDay;
+    int selectedMonth, selectedDay;
 
     private DQLService DQL = new DQLService("jdbc:sqlite:database.db");
 
@@ -353,7 +353,7 @@ public class mainPanel extends calendarDataManager implements ActionListener {
             }
         } else if (e.getSource() == openAddData) {
             try {
-                new addData(selectedDay);
+                new addData(selectedMonth, selectedDay);
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -467,13 +467,14 @@ public class mainPanel extends calendarDataManager implements ActionListener {
 
                 getDateinListener(calYear, calMonth+1, newCalDayOfMon);
 
-                setSelectedDay(newCalDayOfMon);
+                setSelectedDay(calMonth+1, newCalDayOfMon);
                 selectDate();
                 findKindList();
             }
         }
     }
-    public void setSelectedDay(int selected) {
+    public void setSelectedDay(int selectedM,int selected) {
+        selectedMonth = selectedM;
         selectedDay = selected;
     }
 

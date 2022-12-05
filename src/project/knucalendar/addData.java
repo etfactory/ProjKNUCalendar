@@ -14,7 +14,7 @@ public class addData extends calendarDataManager implements ActionListener {
     JComboBox kindbox;
     JLabel errorNotice;
     JButton saveButton, cancelButton, okSign, exit;
-    String nameData, kindData, startdateData, enddateData, whereData, stringData, setAddZero;
+    String nameData, kindData, startdateData, enddateData, whereData, stringData, setAddZero, setAddZeroM;
     int getStartYear,getStartMonth, getStartDateofMonth,
             getEndYear, getEndMonth, getEndDateofMonth,
             getStartDate, getEndDate, setSelectedDay;
@@ -25,7 +25,11 @@ public class addData extends calendarDataManager implements ActionListener {
     public addData(){
 
     }
-    public addData(int getSelectedDay) {
+    public addData(int getSeletedMonth,int getSelectedDay) {
+        if(getSeletedMonth<10)
+            setAddZeroM = "0"+Integer.toString(getSeletedMonth);
+        else
+            setAddZeroM = Integer.toString(getSeletedMonth);
         if(getSelectedDay<10)
             setAddZero = "0"+Integer.toString(getSelectedDay);
         else
@@ -79,10 +83,10 @@ public class addData extends calendarDataManager implements ActionListener {
         kindbox = new JComboBox(arr);
         kindbox.setPreferredSize(new Dimension(500,30));
         kindbox.setFont(new Font("나눔바른고딕",Font.BOLD,17));
-        startta = new JTextArea(calYear+""+(calMonth+1)+""+setAddZero);
+        startta = new JTextArea(calYear+""+setAddZeroM+""+setAddZero);
         startta.setPreferredSize(new Dimension(200,30));
         startta.setFont(new Font("나눔바른고딕",Font.BOLD,20));
-        endta = new JTextArea(calYear+""+(calMonth+1)+""+setAddZero);
+        endta = new JTextArea(calYear+""+setAddZeroM+""+setAddZero);
         endta.setPreferredSize(new Dimension(200,30));
         endta.setFont(new Font("나눔바른고딕",Font.BOLD,20));
         diaryTA = new JPanel();
@@ -188,9 +192,6 @@ public class addData extends calendarDataManager implements ActionListener {
         getEndYear = getEndDate/10000;
         getEndMonth = (getEndDate-(getEndYear*10000))/100;
         getEndDateofMonth = getEndDate-(getEndYear*10000)-(getEndMonth*100);
-    }
-    public void checkZero(){
-
     }
     public void checkSave(){
         checkSave = new JFrame();
