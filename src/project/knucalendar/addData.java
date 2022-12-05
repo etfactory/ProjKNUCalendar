@@ -8,7 +8,7 @@ import java.sql.SQLException;
 
 public class addData extends calendarDataManager implements ActionListener {
     JFrame addData, errorMessage, checkSave;
-    JPanel textPanel, areaPanel, buttonPanel, diaryTA, dataPanel, underDataPanel;
+    JPanel textPanel, areaPanel, buttonPanel, diaryTA, dataPanel;
     JLabel name, kind, string, diary, where;
     JTextArea nameta, stringta, startta, endta, whereta;
     JComboBox kindbox;

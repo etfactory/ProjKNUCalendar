@@ -10,7 +10,7 @@ public class subMenu implements ActionListener {
     resetProgram rs = new resetProgram();
     JFrame subMenu, checkReset;
     JPanel centrePanel_sub,top_gap;
-    JButton darkOnOff, univNotice, univLunch, resetProgram, progInfo, okReset;
+    JButton dataManage, univNotice, univLunch, resetProgram, progInfo, okReset;
     ImageIcon icon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/icon/bear/bearVersion1_1.png")));
     ImageIcon bg = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/submenu/subMenuNormal.png")));
     ImageIcon bt = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/submenu/testButton.png")));
@@ -27,10 +27,6 @@ public class subMenu implements ActionListener {
         centrePanel_sub.setLayout(new FlowLayout());
         centrePanel_sub.setPreferredSize(new Dimension(1280,bt.getIconHeight()));
 
-        darkOnOff = new JButton(bt);
-        darkOnOff.addActionListener(this);
-        darkOnOff.setPreferredSize(new Dimension(bt.getIconWidth(),bt.getIconHeight()));
-
         univNotice = new JButton(bt);
         univNotice.addActionListener(this);
         univNotice.setPreferredSize(new Dimension(bt.getIconWidth(),bt.getIconHeight()));
@@ -38,6 +34,10 @@ public class subMenu implements ActionListener {
         univLunch = new JButton(bt);
         univLunch.addActionListener(this);
         univLunch.setPreferredSize(new Dimension(bt.getIconWidth(),bt.getIconHeight()));
+
+        dataManage = new JButton(bt);
+        dataManage.addActionListener(this);
+        dataManage.setPreferredSize(new Dimension(bt.getIconWidth(),bt.getIconHeight()));
 
         resetProgram = new JButton(bt);
         resetProgram.addActionListener(this);
@@ -47,9 +47,9 @@ public class subMenu implements ActionListener {
         progInfo.addActionListener(this);
         progInfo.setPreferredSize(new Dimension(bt.getIconWidth(),bt.getIconHeight()));
 
-        centrePanel_sub.add(darkOnOff);
         centrePanel_sub.add(univNotice);
         centrePanel_sub.add(univLunch);
+        centrePanel_sub.add(dataManage);
         centrePanel_sub.add(resetProgram);
         centrePanel_sub.add(progInfo);
 
@@ -69,9 +69,9 @@ public class subMenu implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == darkOnOff) {
+        if (e.getSource() == dataManage) {
             try {
-                new willBeUpdate();
+                new dataManage();
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
