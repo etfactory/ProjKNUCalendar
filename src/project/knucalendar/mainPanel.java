@@ -51,6 +51,7 @@ public class mainPanel extends calendarDataManager implements ActionListener {
     ImageIcon monthRight = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/button/monthright.png")));
     ImageIcon yearLeft = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/button/yearleft.png")));
     ImageIcon yearRight = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/button/yearright.png")));
+    ImageIcon addButton = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/button/add.png")));
 
 
     ImageIcon univIcon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/diaryIcon/univ_fix.png")));
@@ -123,8 +124,10 @@ public class mainPanel extends calendarDataManager implements ActionListener {
         selectedDate.setFont(new Font("나눔바른고딕",Font.BOLD,20));
         selectedDate.setHorizontalAlignment(JLabel.CENTER);
 
-        openAddData = new JButton("+");
-        openAddData.setFont(new Font("나눔바른고딕",Font.BOLD,15));
+        openAddData = new JButton(addButton);
+        openAddData.setFocusPainted(false);
+        openAddData.setBorderPainted(false);
+        openAddData.setContentAreaFilled(false);
         openAddData.addActionListener(this);
 
         leftPanel.add(openAddData,BorderLayout.EAST);
@@ -158,7 +161,6 @@ public class mainPanel extends calendarDataManager implements ActionListener {
 
             showDiary.add(iconPanel[i]);
         }
-        findKindList();
         leftPanel.add(diaryPanel,BorderLayout.PAGE_END);
 
         calendarTopPanel = new JPanel();
