@@ -52,6 +52,12 @@ public class mainPanel extends calendarDataManager implements ActionListener {
     ImageIcon yearLeft = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/button/yearleft.png")));
     ImageIcon yearRight = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/button/yearright.png")));
 
+
+    ImageIcon univIcon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/diaryIcon/univ_fix.png")));
+    ImageIcon testIcon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/diaryIcon/test_fix.png")));
+    ImageIcon homeworkIcon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/diaryIcon/homework_fix.png")));
+    ImageIcon userIcon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/diaryIcon/user_fix.png")));
+
     public mainPanel(){
         SQLiteManager manager = new SQLiteManager();
 
@@ -421,6 +427,7 @@ public class mainPanel extends calendarDataManager implements ActionListener {
             for(int i=0;i<15;i++){
                 iconButton[i].setVisible(false);
                 stringButton[i].setVisible(false);
+                setTitle[i].setText("");
             }
             int k=0, l=0, newCalDayOfMon=0;
             for(int i=0;i<6;i++){
@@ -531,31 +538,41 @@ public class mainPanel extends calendarDataManager implements ActionListener {
 
         for(int i=0;i<countHoliday;i++){
             saveString.add(DQL.getHolidayNames[i]);
+            saveFile.add("holiday");
         }
         for(int i=0;i<countUniv;i++){
             saveString.add(DQL.getUnivNames[i]);
+            saveFile.add("univ");
         }
         for(int i=0;i<countTest;i++){
             saveString.add(DQL.getTestNames[i]);
+            saveFile.add("test");
         }
         for(int i=0;i<countHomework;i++){
             saveString.add(DQL.getHomeworkNames[i]);
+            saveFile.add("homework");
         }
         for(int i=0;i<countUser;i++){
             saveString.add(DQL.getUserNames[i]);
+            saveFile.add("user");
         }
 
         for(int i=0;i<saveString.size();i++){
             setTitle[i].setText(saveString.get(i));
+            if(saveFile.get(i).equals("holiday"))
+                iconButton[i].setIcon(userIcon);
+            else if(saveFile.get(i).equals("univ"))
+                iconButton[i].setIcon(univIcon);
+            else if(saveFile.get(i).equals("test"))
+                iconButton[i].setIcon(testIcon);
+            else if(saveFile.get(i).equals("homework"))
+                iconButton[i].setIcon(homeworkIcon);
+            else if(saveFile.get(i).equals("user"))
+                iconButton[i].setIcon(userIcon);
         }
 
-        System.out.println(getYearinListener+" "+getMonthinListener+" "+getDayofMonthinListener);
-        System.out.println(Arrays.toString(DQL.getHolidayName()) +" "+ Arrays.toString(DQL.getUnivName()) +" "+ Arrays.toString(DQL.getTestName()) +" "+ Arrays.toString(DQL.getHomeworkName()) +" "+ Arrays.toString(DQL.getUserNames()));
-        DQL.printMapList(resultHoliday);
-        DQL.printMapList(resultUniv);
-        DQL.printMapList(resultTest);
-        DQL.printMapList(resultHomework);
-        DQL.printMapList(resultUser);
+        saveString.clear();
+        saveFile.clear();
 
         setCount(count);
     }

@@ -219,6 +219,8 @@ public class DQLService extends SQLiteManager {
                 e.printStackTrace();
             }
         }
+
+        univcount=0; holidaycount=0; testcount=0; homeworkcount=0; usercount=0;
         // 결과 반환
         //   - 조회된 데이터 리스트
         return selected;
