@@ -31,6 +31,8 @@ public class mainPanel extends calendarDataManager implements ActionListener {
 
     int count;
 
+    int selectedDay;
+
     private DQLService DQL = new DQLService("jdbc:sqlite:database.db");
 
     int countButtons;
@@ -58,6 +60,8 @@ public class mainPanel extends calendarDataManager implements ActionListener {
     ImageIcon testIcon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/diaryIcon/test_fix.png")));
     ImageIcon homeworkIcon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/diaryIcon/homework_fix.png")));
     ImageIcon userIcon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/diaryIcon/user_fix.png")));
+
+    addData addData;
 
     public mainPanel(){
         SQLiteManager manager = new SQLiteManager();
@@ -349,7 +353,7 @@ public class mainPanel extends calendarDataManager implements ActionListener {
             }
         } else if (e.getSource() == openAddData) {
             try {
-                new addData();
+                new addData(selectedDay);
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -463,11 +467,16 @@ public class mainPanel extends calendarDataManager implements ActionListener {
 
                 getDateinListener(calYear, calMonth+1, newCalDayOfMon);
 
+                setSelectedDay(newCalDayOfMon);
                 selectDate();
                 findKindList();
             }
         }
     }
+    public void setSelectedDay(int selected) {
+        selectedDay = selected;
+    }
+
     public void selectDate(){
         final Map<String, Object> dataMap = new HashMap<String, Object>();
         dataMap.put("year" , getYearinListener);

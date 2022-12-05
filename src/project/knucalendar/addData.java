@@ -17,13 +17,22 @@ public class addData extends calendarDataManager implements ActionListener {
     String nameData, kindData, startdateData, enddateData, whereData, stringData, setAddZero;
     int getStartYear,getStartMonth, getStartDateofMonth,
             getEndYear, getEndMonth, getEndDateofMonth,
-            getStartDate, getEndDate;
+            getStartDate, getEndDate, setSelectedDay;
     String[] arr = {"학사일정","시험","과제","개인일정","공휴일"};
     ImageIcon icon =
             new ImageIcon(Toolkit.getDefaultToolkit().
                     getImage(getClass().getResource("img/icon/bear/bearVersion1_1.png")));
-    public addData() {
-        checkZero();
+    public addData(){
+
+    }
+    public addData(int getSelectedDay) {
+        if(getSelectedDay<10)
+            setAddZero = "0"+Integer.toString(getSelectedDay);
+        else
+            setAddZero = Integer.toString(getSelectedDay);
+        run();
+    }
+    public void run(){
         addData = new JFrame();
         addData.setSize(700,400);
         addData.setLocationRelativeTo(null);
@@ -181,8 +190,7 @@ public class addData extends calendarDataManager implements ActionListener {
         getEndDateofMonth = getEndDate-(getEndYear*10000)-(getEndMonth*100);
     }
     public void checkZero(){
-        if(calDayOfMon<10)
-            setAddZero = "0"+Integer.toString(calDayOfMon);
+
     }
     public void checkSave(){
         checkSave = new JFrame();
