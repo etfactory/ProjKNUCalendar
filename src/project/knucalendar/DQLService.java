@@ -179,7 +179,7 @@ public class DQLService extends SQLiteManager {
                 if( resultMap != null ) {
                     selected.add(resultMap);
                     if(rs.getString(4).equals("학사일정")) {
-                        getUserNames[univcount] = rs.getString(5);
+                        getUnivNames[univcount] = rs.getString(5);
                         univcount++;
                     }
                     else if (rs.getString(4).equals("공휴일")) {

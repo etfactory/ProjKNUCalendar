@@ -252,6 +252,7 @@ public class mainPanel extends calendarDataManager implements ActionListener {
         getDateinListener(calYear, calMonth+1, calDayOfMon);
         showCal();
         selectDate();
+        findKindList();
         calendarPanel.setBorder(new LineBorder(Color.WHITE, 2, true));
 
         rightPanel = new JPanel();
@@ -489,17 +490,6 @@ public class mainPanel extends calendarDataManager implements ActionListener {
 
         int count=0;
 
-        if (countHoliday>0){
-            for(int i=count;i<(count+countHoliday);i++){
-                for(int j=0;j<countHoliday;j++) {
-                    if (DQL.getHolidayNames[j] != null) {
-                        setTitle[count].setText(DQL.getHolidayNames[j]);
-                        count++;
-                    }
-                }
-            }
-        }
-
         dataMap.put("year" , getYearinListener);
         dataMap.put("month", getMonthinListener);
         dataMap.put("date" , getDayofMonthinListener);
@@ -508,17 +498,6 @@ public class mainPanel extends calendarDataManager implements ActionListener {
         List<Map<String, Object>> resultUniv = DQL.findKind(dataMap);
 
         int countUniv = DQL.toInt(resultUniv);
-
-        if (countUniv>0){
-            for(int i=count;i<countUniv;i++){
-                for(int j=0;j<countUniv;j++) {
-                    if (DQL.getUnivNames[j] != null) {
-                        setTitle[count].setText(DQL.getUnivNames[j]);
-                        count++;
-                    }
-                }
-            }
-        }
 
         dataMap.put("year" , getYearinListener);
         dataMap.put("month", getMonthinListener);
@@ -529,17 +508,6 @@ public class mainPanel extends calendarDataManager implements ActionListener {
 
         int countTest = DQL.toInt(resultTest);
 
-        if (countTest>0){
-            for(int i=count;i<(count+countTest);i++){
-                for(int j=0;j<countTest;j++) {
-                    if (DQL.getTestNames[j] != null) {
-                        setTitle[count].setText(DQL.getTestNames[j]);
-                        count++;
-                    }
-                }
-            }
-        }
-
         dataMap.put("year" , getYearinListener);
         dataMap.put("month", getMonthinListener);
         dataMap.put("date" , getDayofMonthinListener);
@@ -548,17 +516,6 @@ public class mainPanel extends calendarDataManager implements ActionListener {
         List<Map<String, Object>> resultHomework = DQL.findKind(dataMap);
 
         int countHomework = DQL.toInt(resultHomework);
-
-        if (countHomework>0){
-            for(int i=count;i<(countHomework+count);i++){
-                for(int j=0;j<countHomework;j++) {
-                    if (DQL.getHomeworkNames[j] != null) {
-                        setTitle[count].setText(DQL.getHomeworkNames[j]);
-                        count++;
-                    }
-                }
-            }
-        }
 
         dataMap.put("year" , getYearinListener);
         dataMap.put("month", getMonthinListener);
@@ -569,15 +526,26 @@ public class mainPanel extends calendarDataManager implements ActionListener {
 
         int countUser = DQL.toInt(resultUser);
 
-        if (countUser>0){
-            for(int i=count;i<(countUser+count);i++){
-                for(int j=0;j<countUser;j++) {
-                    if (DQL.getUserNames[j] != null) {
-                        setTitle[count].setText(DQL.getUserNames[j]);
-                        count++;
-                    }
-                }
-            }
+        ArrayList<String> saveString = new ArrayList<>();
+
+        for(int i=0;i<countHoliday;i++){
+            saveString.add(DQL.getHolidayNames[i]);
+        }
+        for(int i=0;i<countUniv;i++){
+            saveString.add(DQL.getUnivNames[i]);
+        }
+        for(int i=0;i<countTest;i++){
+            saveString.add(DQL.getTestNames[i]);
+        }
+        for(int i=0;i<countHomework;i++){
+            saveString.add(DQL.getHomeworkNames[i]);
+        }
+        for(int i=0;i<countUser;i++){
+            saveString.add(DQL.getUserNames[i]);
+        }
+
+        for(int i=0;i<saveString.size();i++){
+            setTitle[i].setText(saveString.get(i));
         }
 
         System.out.println(getYearinListener+" "+getMonthinListener+" "+getDayofMonthinListener);
