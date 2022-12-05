@@ -23,6 +23,7 @@ public class infoFrame {
         infoPanel.setLayout(new FlowLayout(FlowLayout.CENTER,20,20));
 
         JPanel leftPanel = new JPanel();
+        leftPanel.setBackground(Color.WHITE);
         leftPanel.setLayout(new GridLayout(8,1,10,10));
 
         JLabel versionTitle = new JLabel("VERSION");
@@ -48,6 +49,7 @@ public class infoFrame {
         leftPanel.add(secdeveloperGIT);
 
         JPanel rightPanel = new JPanel();
+        rightPanel.setBackground(Color.WHITE);
         rightPanel.setLayout(new GridLayout(8,1,10,10));
 
         JLabel version = new JLabel("0.0.1");
