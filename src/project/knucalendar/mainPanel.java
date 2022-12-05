@@ -107,7 +107,21 @@ public class mainPanel extends calendarDataManager implements ActionListener {
         시계 - 오른쪽
         시계 작업 안함
          */
+        top_rightPanel = new JPanel();
+        top_rightPanel.setBackground(Color.WHITE);
+        top_rightPanel.setLayout(new FlowLayout(FlowLayout.CENTER));
+
+        JLabel timerLabel = new JLabel();
+        timerLabel.setFont(new Font("나눔바른고딕",Font.BOLD,30));
+        timerLabel.setHorizontalAlignment(JLabel.RIGHT);
+        top_rightPanel.add(timerLabel);
+
+        Timer th = new Timer(timerLabel);
+
+        th.start();
+
         topPanel.add(top_leftPanel,BorderLayout.WEST);
+        topPanel.add(top_rightPanel,BorderLayout.EAST);
 
         centrePanel = new JPanel(){
             public void paintComponent(Graphics g){
