@@ -76,6 +76,7 @@ public class infoFrame {
         infoPanel.add(rightPanel);
 
         JPanel bottomPanel = new JPanel();
+        bottomPanel.setBackground(Color.WHITE);
         JLabel bottomText = new JLabel("KNU Calendar Program");
         bottomText.setFont(new Font("나눔바른고딕",Font.BOLD,16));
         bottomPanel.add(bottomText);
