@@ -25,6 +25,7 @@ public class subMenu implements ActionListener {
 
         centrePanel_sub = new JPanel();
         centrePanel_sub.setLayout(new FlowLayout());
+        centrePanel_sub.setBackground(Color.WHITE);
         centrePanel_sub.setPreferredSize(new Dimension(1280,bt.getIconHeight()));
 
         univNotice = new JButton(bt);
@@ -54,9 +55,12 @@ public class subMenu implements ActionListener {
         centrePanel_sub.add(progInfo);
 
         top_gap = new JPanel();
+        top_gap.setLayout(new BorderLayout());
         top_gap.setBackground(Color.WHITE);
         JLabel title = new JLabel("SubMenu");
-        top_gap.add(title);
+        title.setHorizontalAlignment(JLabel.CENTER);
+        title.setFont(new Font("나눔바른고딕",Font.BOLD,20));
+        top_gap.add(title,BorderLayout.CENTER);
         top_gap.setPreferredSize(new Dimension(900,106));
 
         subMenu.add(top_gap,BorderLayout.NORTH);

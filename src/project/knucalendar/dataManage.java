@@ -15,11 +15,6 @@ public class dataManage extends SQLiteManager implements MouseListener, ActionLi
     Vector v;
     Vector cols;
 
-    JMenu m = new JMenu("관리");
-    JMenuItem update = new JMenuItem("수정");
-    JMenuItem delete = new JMenuItem("삭제");
-    JMenuBar mb = new JMenuBar();
-
     JPanel bottomPanel;
     JButton deleteButton;
 
@@ -30,10 +25,6 @@ public class dataManage extends SQLiteManager implements MouseListener, ActionLi
         manageFrame.setSize(800,600);
         manageFrame.setLocationRelativeTo(null);
         manageFrame.setLayout(new BorderLayout());
-
-        m.add(delete);
-        delete.addActionListener(this);
-        mb.add(m);
 
         v = getMemberList();
         cols = getColumn();
@@ -48,10 +39,13 @@ public class dataManage extends SQLiteManager implements MouseListener, ActionLi
 
         deleteButton = new JButton("삭제");
         deleteButton.addActionListener(this);
+        deleteButton.setBackground(new Color(5,62,143));
+        deleteButton.setBorderPainted(false);
+        deleteButton.setOpaque(true);
+        deleteButton.setForeground(Color.WHITE);
 
         bottomPanel.add(deleteButton);
 
-        manageFrame.setJMenuBar(mb);
         manageFrame.add(jScrollPane,BorderLayout.CENTER);
         manageFrame.add(bottomPanel,BorderLayout.SOUTH);
         manageFrame.setVisible(true);
