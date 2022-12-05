@@ -19,6 +19,7 @@ public class infoFrame {
         infoFrame.setVisible(true);
 
         infoPanel = new JPanel();
+        infoPanel.setBackground(Color.WHITE);
         infoPanel.setLayout(new FlowLayout(FlowLayout.CENTER,20,20));
 
         JPanel leftPanel = new JPanel();

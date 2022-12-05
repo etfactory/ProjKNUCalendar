@@ -39,6 +39,7 @@ public class dataManage extends SQLiteManager implements MouseListener, ActionLi
 
         deleteButton = new JButton("삭제");
         deleteButton.addActionListener(this);
+        deleteButton.setFont(new Font("나눔바른고딕",Font.PLAIN,14));
         deleteButton.setBackground(new Color(5,62,143));
         deleteButton.setBorderPainted(false);
         deleteButton.setOpaque(true);

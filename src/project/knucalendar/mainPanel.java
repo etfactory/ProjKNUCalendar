@@ -275,6 +275,7 @@ public class mainPanel extends calendarDataManager implements ActionListener {
                 dateButton[i][j].setOpaque(true);
             }
         }
+        setSelectedDay(calMonth+1, calDayOfMon);
         getDateinListener(calYear, calMonth+1, calDayOfMon);
         showCal();
         selectDate();
