@@ -118,10 +118,10 @@ public class dataManage extends SQLiteManager implements MouseListener, ActionLi
         try{
             pstmt = conn.prepareStatement(sql);
 
-            pstmt.setObject(1, data.getValueAt(getRow,0));
-            pstmt.setObject(2, data.getValueAt(getRow,1));
-            pstmt.setObject(3, data.getValueAt(getRow,2));
-            pstmt.setObject(4, data.getValueAt(getRow,3));
+            pstmt.setObject(1, data.getValueAt(jTable.getSelectedRow(),0));
+            pstmt.setObject(2, data.getValueAt(jTable.getSelectedRow(),1));
+            pstmt.setObject(3, data.getValueAt(jTable.getSelectedRow(),2));
+            pstmt.setObject(4, data.getValueAt(jTable.getSelectedRow(),3));
 
             pstmt.executeUpdate();
 
