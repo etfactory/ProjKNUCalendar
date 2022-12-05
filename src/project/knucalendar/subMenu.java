@@ -12,8 +12,11 @@ public class subMenu implements ActionListener {
     JPanel centrePanel_sub,top_gap;
     JButton dataManage, univNotice, univLunch, resetProgram, progInfo, okReset;
     ImageIcon icon = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/icon/bear/bearVersion1_1.png")));
-    ImageIcon bg = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/submenu/subMenuNormal.png")));
-    ImageIcon bt = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/submenu/testButton.png")));
+    ImageIcon notice = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/submenu/notice.png")));
+    ImageIcon lunch = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/submenu/lunch.png")));
+    ImageIcon manage = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/submenu/manage.png")));
+    ImageIcon reset = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/submenu/reset.png")));
+    ImageIcon info = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("img/gui/submenu/info.png")));
     public subMenu(){
         subMenu = new JFrame();
         subMenu.setSize(900,600);
@@ -26,27 +29,26 @@ public class subMenu implements ActionListener {
         centrePanel_sub = new JPanel();
         centrePanel_sub.setLayout(new FlowLayout());
         centrePanel_sub.setBackground(Color.WHITE);
-        centrePanel_sub.setPreferredSize(new Dimension(1280,bt.getIconHeight()));
 
-        univNotice = new JButton(bt);
+        univNotice = new JButton(notice);
         univNotice.addActionListener(this);
-        univNotice.setPreferredSize(new Dimension(bt.getIconWidth(),bt.getIconHeight()));
+        univNotice.setPreferredSize(new Dimension(notice.getIconWidth(),notice.getIconHeight()));
 
-        univLunch = new JButton(bt);
+        univLunch = new JButton(lunch);
         univLunch.addActionListener(this);
-        univLunch.setPreferredSize(new Dimension(bt.getIconWidth(),bt.getIconHeight()));
+        univLunch.setPreferredSize(new Dimension(lunch.getIconWidth(),lunch.getIconHeight()));
 
-        dataManage = new JButton(bt);
+        dataManage = new JButton(manage);
         dataManage.addActionListener(this);
-        dataManage.setPreferredSize(new Dimension(bt.getIconWidth(),bt.getIconHeight()));
+        dataManage.setPreferredSize(new Dimension(manage.getIconWidth(),manage.getIconHeight()));
 
-        resetProgram = new JButton(bt);
+        resetProgram = new JButton(reset);
         resetProgram.addActionListener(this);
-        resetProgram.setPreferredSize(new Dimension(bt.getIconWidth(),bt.getIconHeight()));
+        resetProgram.setPreferredSize(new Dimension(reset.getIconWidth(),reset.getIconHeight()));
 
-        progInfo = new JButton(bt);
+        progInfo = new JButton(info);
         progInfo.addActionListener(this);
-        progInfo.setPreferredSize(new Dimension(bt.getIconWidth(),bt.getIconHeight()));
+        progInfo.setPreferredSize(new Dimension(info.getIconWidth(),info.getIconHeight()));
 
         centrePanel_sub.add(univNotice);
         centrePanel_sub.add(univLunch);
