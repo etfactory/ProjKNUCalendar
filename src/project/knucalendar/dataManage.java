@@ -7,7 +7,7 @@ import java.util.*;
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 
-public class dataManage{
+public class dataManage extends SQLiteManager implements MouseListener, ActionListener{
     JFrame manageFrame, updateData;
     JTable jTable;
     JScrollPane jScrollPane;
@@ -21,12 +21,9 @@ public class dataManage{
     JMenuBar mb = new JMenuBar();
 
     JPanel bottomPanel;
+    JButton deleteButton;
 
-    String[] arr = {"학사일정","시험","과제","개인일정","공휴일"};
-
-    JComboBox comboBox;
-    JTextField searchField;
-    JButton searchButton;
+    int getRow, getCol;
 
     public dataManage() {
         manageFrame = new JFrame();
@@ -34,8 +31,8 @@ public class dataManage{
         manageFrame.setLocationRelativeTo(null);
         manageFrame.setLayout(new BorderLayout());
 
-        m.add(update);
         m.add(delete);
+        delete.addActionListener(this);
         mb.add(m);
 
         v = getMemberList();
@@ -47,24 +44,19 @@ public class dataManage{
         jScrollPane = new JScrollPane(jTable);
 
         bottomPanel = new JPanel();
-        comboBox = new JComboBox(arr);
-        comboBox.setFont(new Font("나눔바른고딕",Font.PLAIN,12));
-        searchField = new JTextField(30);
-        searchField.setFont(new Font("나눔바른고딕",Font.PLAIN,14));
-        searchButton = new JButton("검색");
-        searchButton.setFont(new Font("나눔바른고딕",Font.PLAIN,12));
+        bottomPanel.setLayout(new FlowLayout(FlowLayout.RIGHT));
 
-        bottomPanel.add(comboBox);
-        bottomPanel.add(searchField);
-        bottomPanel.add(searchButton);
+        deleteButton = new JButton("삭제");
+        deleteButton.addActionListener(this);
+
+        bottomPanel.add(deleteButton);
 
         manageFrame.setJMenuBar(mb);
-        manageFrame.add(bottomPanel,BorderLayout.SOUTH);
         manageFrame.add(jScrollPane,BorderLayout.CENTER);
+        manageFrame.add(bottomPanel,BorderLayout.SOUTH);
         manageFrame.setVisible(true);
     }
     public Vector getMemberList(){
-
         Vector data = new Vector();  //Jtable에 값을 쉽게 넣는 방법 1. 2차원배열   2. Vector 에 vector추가
 
 
@@ -118,7 +110,65 @@ public class dataManage{
 
         return col;
     }
+
+    public void delete(DefaultTableModel data){
+        Connection conn = ensureConnection();
+        PreparedStatement pstmt = null; //명령
+        final String sql = "DELETE FROM diarydata"+"\n"
+                + " WHERE year= ?                "+"\n"
+                + " AND month = ?                "+"\n"
+                + " AND date  = ?                "+"\n"
+                + " AND name  = ?                "+"\n";
+
+        try{
+            pstmt = conn.prepareStatement(sql);
+
+            pstmt.setObject(1, data.getValueAt(getRow,0));
+            pstmt.setObject(2, data.getValueAt(getRow,1));
+            pstmt.setObject(3, data.getValueAt(getRow,2));
+            pstmt.setObject(4, data.getValueAt(getRow,3));
+
+            pstmt.executeUpdate();
+
+            conn.commit();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+    }
     public void jTableRefresh(){
         DefaultTableModel model = new DefaultTableModel(getMemberList(), getColumn());
+    }
+    @Override
+    public void mouseClicked(MouseEvent e) {
+        getRow = jTable.getSelectedRow();
+        getCol = jTable.getSelectedColumn();
+    }
+
+    @Override
+    public void mousePressed(MouseEvent e) {
+        // TODO Auto-generated method stub
+    }
+
+    @Override
+    public void mouseReleased(MouseEvent e) {
+        // TODO Auto-generated method stub
+    }
+
+    @Override
+    public void mouseEntered(MouseEvent e) {
+        // TODO Auto-generated method stub
+    }
+
+    @Override
+    public void mouseExited(MouseEvent e) {
+        // TODO Auto-generated method stub
+    }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource()==deleteButton) {
+            int row = jTable.getSelectedRow();
+            delete(model);
+            jTableRefresh();
+        }
     }
 }
