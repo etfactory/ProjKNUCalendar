@@ -61,7 +61,7 @@ public class dataManage extends SQLiteManager implements MouseListener, ActionLi
 
         try{
             conn = DriverManager.getConnection("jdbc:sqlite:database.db");
-            String sql = "select * from diarydata order by name asc";
+            String sql = "select * from diarydata order by kind asc";
             ps = conn.prepareStatement(sql);
             rs = ps.executeQuery();
 

@@ -19,7 +19,26 @@ public class backupData extends SQLiteManager{
 
         try {
             stmt = conn.createStatement();
-            stmt.executeUpdate("INSERT INTO diarydata (year, month, date, name, kind, string, address, icon) VALUES (2022, 1, 3, '정시원서접수마감', '학사일정', '2022년 공주대학교 학사일정', '공주대학교', 'university.png');\n" +
+            stmt.executeUpdate("INSERT INTO diarydata (year, month, date, name, kind, string, address, icon) VALUES (2022, 1, 1, '신정', '공휴일', null, null, 'user.png');\n" +
+                    "INSERT INTO diarydata (year, month, date, name, kind, string, address, icon) VALUES (2022, 1, 31, '설연휴', '공휴일', null, null, 'user.png');\n" +
+                    "INSERT INTO diarydata (year, month, date, name, kind, string, address, icon) VALUES (2022, 2, 1, '설날', '공휴일', null, null, 'user.png');\n" +
+                    "INSERT INTO diarydata (year, month, date, name, kind, string, address, icon) VALUES (2022, 2, 2, '설연휴', '공휴일', null, null, 'user.png');\n" +
+                    "INSERT INTO diarydata (year, month, date, name, kind, string, address, icon) VALUES (2022, 3, 1, '삼일절', '공휴일', '국경일', null, 'user.png');\n" +
+                    "INSERT INTO diarydata (year, month, date, name, kind, string, address, icon) VALUES (2022, 3, 9, '20대 대선', '공휴일', '제20대 대통령 선거', null, 'user.png');\n" +
+                    "INSERT INTO diarydata (year, month, date, name, kind, string, address, icon) VALUES (2022, 5, 5, '어린이날', '공휴일', null, null, 'user.png');\n" +
+                    "INSERT INTO diarydata (year, month, date, name, kind, string, address, icon) VALUES (2022, 6, 1, '지방선거', '공휴일', '제8회 전국동시지방선거', null, 'user.png');\n" +
+                    "INSERT INTO diarydata (year, month, date, name, kind, string, address, icon) VALUES (2022, 6, 6, '현충일', '공휴일', null, null, 'user.png');\n" +
+                    "INSERT INTO diarydata (year, month, date, name, kind, string, address, icon) VALUES (2022, 7, 17, '제헌절', '공휴일', '국경일', null, 'user.png');\n" +
+                    "INSERT INTO diarydata (year, month, date, name, kind, string, address, icon) VALUES (2022, 8, 15, '광복절', '공휴일', '국경일', null, 'user.png');\n" +
+                    "INSERT INTO diarydata (year, month, date, name, kind, string, address, icon) VALUES (2022, 9, 9, '추석연휴', '공휴일', null, null, 'user.png');\n" +
+                    "INSERT INTO diarydata (year, month, date, name, kind, string, address, icon) VALUES (2022, 9, 10, '추석', '공휴일', null, null, 'user.png');\n" +
+                    "INSERT INTO diarydata (year, month, date, name, kind, string, address, icon) VALUES (2022, 9, 11, '추석연휴', '공휴일', null, null, 'user.png');\n" +
+                    "INSERT INTO diarydata (year, month, date, name, kind, string, address, icon) VALUES (2022, 9, 12, '대체공휴일', '공휴일', null, null, 'user.png');\n" +
+                    "INSERT INTO diarydata (year, month, date, name, kind, string, address, icon) VALUES (2022, 10, 3, '개천절', '공휴일', '국경일', null, 'user.png');\n" +
+                    "INSERT INTO diarydata (year, month, date, name, kind, string, address, icon) VALUES (2022, 10, 9, '한글날', '공휴일', '국경일', null, 'user.png');\n" +
+                    "INSERT INTO diarydata (year, month, date, name, kind, string, address, icon) VALUES (2022, 10, 10, '대체공휴일', '공휴일', null, null, 'user.png');\n" +
+                    "INSERT INTO diarydata (year, month, date, name, kind, string, address, icon) VALUES (2022, 12, 25, '크리스마스', '공휴일', null, null, 'user.png');\n" +
+                    "INSERT INTO diarydata (year, month, date, name, kind, string, address, icon) VALUES (2022, 1, 3, '정시원서접수마감', '학사일정', '2022년 공주대학교 학사일정', '공주대학교', 'university.png');\n" +
                     "INSERT INTO diarydata (year, month, date, name, kind, string, address, icon) VALUES (2022, 1, 3, '시무식', '학사일정', '2022년 공주대학교 학사일정', '공주대학교', 'university.png');\n" +
                     "INSERT INTO diarydata (year, month, date, name, kind, string, address, icon) VALUES (2022, 2, 1, '휴·복학원 제출 시작', '학사일정', '2022년 공주대학교 학사일정', '공주대학교', 'university.png');\n" +
                     "INSERT INTO diarydata (year, month, date, name, kind, string, address, icon) VALUES (2022, 2, 9, '1학기 수강신청기간 시작', '학사일정', '2022년 공주대학교 학사일정', '공주대학교', 'university.png');\n" +
